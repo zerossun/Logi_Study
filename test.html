@@ -6,6 +6,65 @@
     <title>Document</title>
 </head>
 <body>
-    hello world
+    <script>
+
+    // 조건문
+        //문제1
+       function time (h,m){
+        if(m < 45){
+            // m + 60 ,h - 1 ? h = 0
+            // (h+23)
+            if(h == 0){
+                console.log((h + 23),(m + 60 - 45));
+                // if(m > 60){
+                    // console.log((h + 1),(m - 60));
+                // }
+            }else if(h >= 1){
+                console.log((h - 1),(m + 60 - 45));
+            }
+            // console.log((h+1),(m-45))
+        }else if(m > 44){
+            console.log((h),(m - 45));
+                }
+        }
+        time(10,10);
+
+    // 문제2
+
+    function dice(dice1, dice2, dice3){
+    if( dice1 == dice2 && dice1 == dice3){
+        console.log(10000 + (dice1) * 1000)
+    }else if(dice1 == dice2 || dice1 == dice3){
+        console.log(1000 + (dice1) * 100)
+    }else if(dice1 == dice2 || dice2 == dice3){
+        console.log(1000 * (dice2) * 100)
+    }else{
+        console.log(Math.max(dice1, dice2, dice3) * 100);
+        
+    }
+    } 
+    dice(6,2,5)
+
+
+    // 반복문
+        // 문제3
+    
+    // function mulity(num){
+    //     for(let i = 1; i < 10; i++){
+    //         console.log( `${num} * ${i} = ${(num * i)}`);
+    //     }
+    // }
+    // mulity(2)
+        
+        //문제4
+        const input = require('fs').readFileSync('/dev/stdin').toString().split('\n');
+        const num2 = Number(input[0]);
+console.log(input)
+for(let i = 1; i <= num2; i++){
+  let score = input[i].split(' ');
+  console.log(Number(score[0]) + Number(score[1]));
+};
+
+    </script>
 </body>
 </html>
