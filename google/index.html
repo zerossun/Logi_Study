@@ -8,7 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-    <form id="LoginForm" class="hidden">
+    <h2 id="clock">00:00</h2>
+    <form id="LoginForm">
         <input
         required
         maxlength="15"
@@ -17,10 +18,23 @@
         />
         <input type="submit" value="Login"/>
     </form>
-    <h2 id="clock">00:00</h2>
     <h1 id="greeting" class="hidden"></h1>
     <button id="logout" class="hidden">logout</button>
-    <script src="login.js"></script>
+    <form id="todo_form">
+        <input type="text" placeholder="write a TodoList">
+    </form>
+    <ul id="todo_list"></ul>
+    <div id="quote">
+        <span></span>
+        <span></span>
+    </div>   
+    
+    
+    <!-- <script src="login.js"></script> -->
+    <script src="login2.js"></script>
+    <script src="quotes.js"></script>
     <script src="clock.js"></script>
+    <script src="background.js"></script>
+    <script src="todo.js"></script>
 </body>
-</html>     
+</html>      

@@ -1,18 +1,15 @@
 const Clock = document.querySelector("#clock");
 
-function getClock(){
-    // const date = new Date();
-    // const hours = String(date.getHours()).padStart(2,"0");
-    // const minute = String(date.getMinutes()).padStart(2,"0");
-    // const second = String(date.getSeconds()).padStart(2,"0");
+function onClock(){
+    
+    const date = new Date;
+    const hour = String(date.getHours()).padStart(2, '0');
+    const minute = String(date.getMinutes()).padStart(2, '0');
+    const second = String(date.getSeconds()).padStart(2, '0');
+    Clock.innerText = (`${hour} : ${minute} : ${second}`);    
 
-    // Clock.innerText = `${hours} : ${minute} : ${second}`;
-
-    Clock.innerText = new Date().toLocaleTimeString();
+    Clock.innerText = (date.toLocaleTimeString());
 }
-//웹사이트가 load되자마자 getClock(); 실행
-getClock();
-setInterval(getClock, 1000);
 
-
-
+onClock();
+setInterval(onClock, 1000);
