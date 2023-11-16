@@ -36,7 +36,7 @@ function LogOutBtn2(){
 const setItem2 = localStorage.getItem("username");
 if(setItem2 === null){
     greeting.classList.add(HIDDEN);
-    
+                             
 }else{
     Greet(setItem2);
     LoginForm.classList.add(HIDDEN);
