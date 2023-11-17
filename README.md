@@ -72,4 +72,5 @@ function LoginBtn2() {
 }
 ```
 #### 예제 결과값
-<img src="https://ibb.co/DW01cPJ" width="700">
+<img src="https://github.com/zerossun/Logi_Study/assets/130970089/25b1ebb4-79c5-475e-b4db-9fc996e94569"  width="700" height="370">
+
