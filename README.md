@@ -9,7 +9,7 @@
 ## Js 기초 문법
 
 1) 호이스팅과 변수 선언<br>
-  [블로그 주소]
+  [블로그 주소](https://velog.io/@wonssun/TDZ%EC%99%80-%EB%B3%80%EC%88%98%EB%93%A4)
 2) 네이밍 컨벤션, 식별자 네이밍 규칙<br>
   [블로그 주소]
 3) vscode prettier 설정<br>
