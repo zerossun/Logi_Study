@@ -2,7 +2,7 @@ const TodoForm = document.querySelector("#todo_form");
 const TodoInput = document.querySelector("#todo_form input")
 const TodoList = document.querySelector("#todo_list");
 
-const ToDos = [];
+let ToDos = [];
 const TODOS_KEY = "todos"
 function SaveToDos(){
     localStorage.setItem(TODOS_KEY, JSON.stringify(ToDos));
@@ -13,17 +13,20 @@ function SaveToDos(){
 function DeleteTodo2(event){
     const li2 = event.target.parentNode;
     li2.remove();
+    ToDos = ToDos.filter(toDo => li2.id !== parseInt(li2.id));
+    SaveToDos();
 }
 
 // PaintTodo : TODO를 그리는 역할
 function PaintTodo(userlist){    
     const li = document.createElement("li");
+    li.id = userlist.id
     const span = document.createElement("span");
     const Btn = document.createElement("button");
     Btn.addEventListener("click", DeleteTodo2);
     li.append(span, Btn);
     TodoList.appendChild(li);
-    span.innerText = userlist;
+    span.innerText = userlist.text;
     Btn.innerHTML = "❌";
 };
 
@@ -32,9 +35,13 @@ function HandleTodo(e){
     const userlist = TodoInput.value;
     localStorage.setItem("TodoList", userlist);
     TodoInput.value = "";
-    ToDos.push(userlist); 
-    PaintTodo(userlist);
-    SaveToDos(ToDos);
+    const newTodoObj = {
+        text: userlist,
+        id: Date.now(),
+    };
+    ToDos.push(newTodoObj);
+    PaintTodo(newTodoObj);
+    SaveToDos(newTodoObj);
 
 }
 
@@ -71,14 +78,15 @@ function sayHello(item){
 
 if(savedTodos !== null){
     const parsedTodos = JSON.parse(savedTodos);
+    ToDos = parsedTodos;
     console.log(parsedTodos);
     // array임. 그래서 forEach를 갖고있음.
-    parsedTodos.forEach(sayHello);
+    // parsedTodos.forEach(sayHello);
     // sayHello function을 실행해줘. => 결과값 `(숫자)hello` ["a","b"]
     // 하지만 위의 코드는 array의 item들에 대해 한개의 function만 실행할 수 있게 해줌.
     // 여기서 발생하는 문제 : 내가 어떤 item을 사용하고 있는지를 모름.
     // 이거에 대한 해결방안은 sayHello 하단의 주석확인.
-    parsedTodos.forEach((item)=> console.log(item));
+    parsedTodos.forEach(PaintTodo);
     // 그리고 위의 대환장쇼를 짧게 만들 수 있는 화살표함수라는 좋은 것이 있습니다.
 }
 
