@@ -53,11 +53,3 @@ function Yourname1(e) {
 LogOut.addEventListener('click', LogOutBtn);
 
 LoginInput.addEventListener('change', Yourname1);
-
-class qwe {
-  constructor(color) {
-    this.color = color;
-  }
-}
-const boo = new qwe('rty');
-console.log(boo.qwe);
