@@ -8,12 +8,10 @@ const HIDDEN = 'hidden';
 
 function LoginBtn2(e) {
   e.preventDefault();
-  const yourname2 = LoginInput.value;
-  //   console.log(yourname2);
   localStorage.setItem('username', LoginInput.value);
-  //   LoginForm.classList.add(HIDDEN);
-  //   Logout.classList.remove(HIDDEN);
-  //   Greet(yourname2);
+  LoginForm.classList.add(HIDDEN);
+  Logout.classList.remove(HIDDEN);
+  Greet(LoginInput.value);
 }
 function LoginInputChnage(e) {
   console.log(e.value);

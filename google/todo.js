@@ -14,6 +14,7 @@ function DeleteTodo2(event) {
   const li2 = event.target.parentNode;
   li2.remove();
   ToDos = ToDos.filter((toDo) => toDo.id !== parseInt(li2.id));
+  // 그래 삭제 버튼을 누를 때마다 todos 리스트는 내가 찾은 li.id 다른 것만 필터로 걸러서 보여달라는거야
   SaveToDos();
 }
 
@@ -102,3 +103,20 @@ if (savedTodos !== null) {
 
 // 혹시나 헷갈리까봐 써 두는 것.
 // localStoage는 db가 아니다.  toDos array를 복사해두는 곳임.
+
+//============================
+// [tolist 기능 총정리]
+// 1. array 변수 만들어주기.
+// 2. 함수에 리스트 listitem 넣어주기
+// 3. 저장함수 만들어 todolist에 기능 적용시키기.
+// 여기까지의 문제 : 저장은 되어있지만 화면에 보이지 않음.
+// 4. 변수 하나 만들어 localsotrage 정보 가져오기.
+// 5. 가져온 정보 parse 함수로 문자열 객체로 변환시키기.
+// 6. 변환시킨 거 foreach함수로 각각 화면에 뿌려주기.
+// 7. 전에 작성해둔 거 새로고침 후 작성해도 날아가지 않게 고정 if문 'savedTodos1에 정보있다'에
+//    todos = [] 대신, todos = parse변수로 변경해주기
+// 여기까지의 문제 : 삭제버튼을 눌러도 localstorage에는 정보가 남아있음. 그래서 새로고침해도 삭제가 안됨.
+//                  삭제 해줘야 됨.
+// [문제 해결 방법 ㅣ li.id값을 뽑아서 삭제버튼 클릭 시 li.id 값이 같은 걸 필터로 걸러서 남은 것만 보여주기. ]
+// 8. HandleTodo에 텍스트만 불러왔던 거 id와 텍스트 둘 다 불러오기
+// 9. 삭제 버튼 기능에 'todos 리스트는 내가 찾은 li.id 다른 것만 필터로 걸러서 보여줘'라는 명령어 달기(여기서 li.id는 sting이라 number로 변형해야 됨.)

@@ -1,42 +1,89 @@
-const TodoForm2 = document.querySelector("#todo_form");
-const TodoInput2 = document.querySelector("#todo_form input");
-const TodoList2 = document.querySelector("#todo_list");
+const TodoForm2 = document.querySelector('#todo_form');
+const TodoInput2 = document.querySelector('#todo_form input');
+const TodoList2 = document.querySelector('#todo_list');
 
+const LOGIFORM_HIDDEN = 'hidden';
 
+let toDos1 = [];
 
-
-function DeleteTodo(event){
-    const li2 = event.target.parentElement;
-    li2.remove();
+function SavedTodos1() {
+  localStorage.setItem('todos', JSON.stringify(toDos1));
 }
 
-function PaintTodo2(listitem){
-    console.log(listitem);
-    const li = document.createElement("li");
-    const span = document.createElement("span");
-    const Xbtn = document.createElement("button");
-    Xbtn.addEventListener("click", DeleteTodo);
-    span.innerText = listitem;
-    Xbtn.innerText ="✔";
-    li.append(span, Xbtn)
-    TodoList2.append(li);
-    
+//list삭제 버튼
+function DeleteTodo(event) {
+  const li2 = event.target.parentElement;
+  li2.remove();
+  toDos1 = toDos1.filter((toDo) => toDo.id !== parseInt(li2.id));
+  SavedTodos1();
 }
 
-function todolist(e){
-    e.preventDefault();
-    const listitem = TodoInput2.value;
-    localStorage.setItem("todolist",listitem);
-    TodoInput2.value = "";
-    PaintTodo2(listitem);    
+// [코딩은 기세다.]
+// 수정버튼을 클릭했을 때,
+// span 숨겨주고, input박스가 보여야 됨.
+// input 박스에는 li.span 정보가 써있어야 되고
+// 수정 버튼 다시 클릭했을 때, input박스 숨겨주고 li.span이 보여야 됨.
+// 삼항연산자로 했을 때,
+// 만약 li.span이 block으로 되어있으면, true일 때 숨김처리 & input 보여주기. : false 일 때, li.span block, input 숨김처리
+
+// 우선 그러면 버튼 클릭했을 때 li.text부터 가져오자. input이 나오는 기능 부터 만들어보자.
+// function modify(event) {
+//   console.log('qwerty');
+//   const li3 = event.target.parentElement;
+//   console.log(li3.text);
+// }
+
+// function modify(listitem) {
+//   console.log('qwerty');
+//   const li3 = listitem.target.parentElement;
+//   const txt = li3.text;
+//   console.log(txt);
+
+//   txt.classList.add(LOGIFORM_HIDDEN);
+// }
+
+// PaintTodo : TODO를 그리는 역할
+function PaintTodo2(listitem) {
+  const li = document.createElement('li');
+  li.id = listitem.id;
+  li.text = listitem.text;
+  const span = document.createElement('span');
+  const Xbtn = document.createElement('button');
+  const Mbtn = document.createElement('div');
+  Xbtn.addEventListener('click', DeleteTodo);
+  span.innerText = listitem.text;
+  Xbtn.innerText = '삭제';
+
+  Mbtn.classList.add('li');
+  Mbtn.addEventListener('click', (event) => modify(event, todo.id));
+  Mbtn.innerText = li.text;
+
+  li.append(span, Xbtn, Mbtn);
+  TodoList2.append(li);
 }
 
+function todolist(e) {
+  e.preventDefault();
+  const listitem = TodoInput2.value;
+  localStorage.setItem('todolist', listitem);
+  TodoInput2.value = '';
+  const listObg = {
+    text: listitem,
+    id: Date.now(),
+  };
 
-// 자 다시 쉽게 순서 설명
-// 1. 사용자가 form을 submit 하면, 우리는 input을 비우고
-// 2. 그 텍스트(userlist)를 ToDos array에 push하고
-// 3. 화면에 todo를 그려주고 => PaintTodo(userlist);
-// 4. saveToDos를 이용해 todo를 그려줌.
+  toDos1.push(listObg);
+  PaintTodo2(listObg);
+  SavedTodos1(listObg);
+}
 
+const savedTodos1 = localStorage.getItem('todos');
 
-TodoForm2.addEventListener("submit", todolist);
+if (savedTodos1 != null) {
+  const obg = JSON.parse(savedTodos1);
+  toDos1 = obg;
+  console.log(obg);
+  obg.forEach(PaintTodo2);
+}
+
+TodoForm2.addEventListener('submit', todolist);
