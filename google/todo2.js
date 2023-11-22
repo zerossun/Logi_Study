@@ -69,7 +69,7 @@ function PaintTodo2(listitem) {
       Input.classList.add(LOGIFORM_HIDDEN);
       SavedTodos1();
       span.innerText = Input.value; //화면에 나오는 거까지 성공함ㅜㅜㅜㅜㅜ
-      // 라스트, 이제 저장만 하면됨!!! 겁 먹지마. 욕먹는다고 죽는 거 아님.
+      // 라스트, 이제 저장만 하면됨!!! 는 젤 난제네
     }
 
     // 자 이제 저 input에 li.span 내용을 넣어주면 됨.
