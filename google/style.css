@@ -1,3 +1,11 @@
 .hidden {
   display: none;
 }
+.edit-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 590px;
+  height: 2.8rem;
+  margin: 0;
+}
