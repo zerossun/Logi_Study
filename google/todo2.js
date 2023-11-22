@@ -68,6 +68,8 @@ function PaintTodo2(listitem) {
       span.classList.remove(LOGIFORM_HIDDEN);
       Input.classList.add(LOGIFORM_HIDDEN);
       SavedTodos1();
+      span.innerText = Input.value; //화면에 나오는 거까지 성공함ㅜㅜㅜㅜㅜ
+      // 라스트, 이제 저장만 하면됨!!! 겁 먹지마. 욕먹는다고 죽는 거 아님.
     }
 
     // 자 이제 저 input에 li.span 내용을 넣어주면 됨.
@@ -112,6 +114,9 @@ function PaintTodo2(listitem) {
 
 function todolist(e) {
   e.preventDefault();
+  // 보아하니 이거는 맨위에 것만 먹는 거고
+  // 내가 수정한 거는 또 따로 여기 코드를 만들어주어야 할 것 같구먼
+
   const listitem = TodoInput2.value;
   localStorage.setItem('todolist', listitem);
   TodoInput2.value = '';
