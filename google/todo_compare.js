@@ -42,29 +42,42 @@ function PaintTodo2(listitem) {
 
   TodoList2.append(li);
 
-  const modify = (event, listitem) => {
-    if (Input.value == '') {
-      console.log('qwerty1');
-      Input.value = span.innerText;
-      span.classList.add(LOGIFORM_HIDDEN); // 뭐가 뭔지 모르지만 일단 숨겨짐.
-      Input.classList.remove(LOGIFORM_HIDDEN); // 뭐가 뭔지 모르지만 일단 나옴.
-    } else {
-      console.log('qwertytyuasdzfasdf');
-      span.classList.remove(LOGIFORM_HIDDEN);
-      Input.classList.add(LOGIFORM_HIDDEN);
-      SavedTodos1();
-      span.innerText = Input.value; //화면에 나오는 거까지 성공함ㅜㅜㅜㅜㅜ
-      // 라스트, 이제 저장만 하면됨!!! 는 젤 난제네
-    }
+  //   const modify = (event, listitem) => {
+  //     if (Input.value == '') {
+  //       console.log('qwerty1');
+  //       Input.value = span.innerText;
+  //       span.classList.add(LOGIFORM_HIDDEN);
+  //       Input.classList.remove(LOGIFORM_HIDDEN);
+  //     } else {
+  //       console.log('qwertytyuasdzfasdf');
+  //       span.classList.remove(LOGIFORM_HIDDEN);
+  //       Input.classList.add(LOGIFORM_HIDDEN);
+  //       SavedTodos1();
+  //       span.innerText = Input.value;
+  //     }
 
-    // 대리님코드를 보며 비교해보는 시간.
-  };
+  //   };
+}
+
+// 대리님코드를 보며 비교해보는 시간.
+
+// 정신흐트려질 때마다 뺨 한대
+// 1. 일단, 함수로 변수가 아닌 함수로 따로 뺐음.
+
+function modify1(event, listitem) {
+  const targetLiElement1 = event.target.parentElement;
+  // 왜 부모함수를 지정했나. -> 지금 '수정'버튼이 쥔공 그의 부모는 li이기 때문.
+  const targetInputElemnt1 = targetLiElement1.getElementsByTagName('input')[0];
+  const targetSpanElemnt1 = targetInputElemnt1.getElementsByTagName('span')[0];
+  // 'data-' : 데이터 속성을 일컫음. li.id = listitem.id; 거기서 id만 빼온다구
+  const inputTemp1 = document.querySelector(
+    `input[data-id = "${listitem.id}"]`
+  );
+  console.log('targetInputElement', targetInputElemnt1, inputTemp1); // 왜 안찍히지..?
 }
 
 function todolist(e) {
   e.preventDefault();
-  // 보아하니 이거는 맨위에 것만 먹는 거고
-  // 내가 수정한 거는 또 따로 여기 코드를 만들어주어야 할 것 같구먼
 
   const listitem = TodoInput2.value;
   localStorage.setItem('todolist', listitem);
