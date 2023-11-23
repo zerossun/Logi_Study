@@ -10,10 +10,10 @@
 
 1) 호이스팅과 변수 선언<br>
   [블로그 주소](https://velog.io/@wonssun/TDZ%EC%99%80-%EB%B3%80%EC%88%98%EB%93%A4)
-2) 네이밍 컨벤션, 식별자 네이밍 규칙<br>
-  [블로그 주소]
-3) vscode prettier 설정<br>
-  [블로그 주소]
+2) 사용한 js 함수 목록<br>
+  [블로그 주소](https://velog.io/@wonssun/js-%EA%B8%B0%EB%B3%B8-%ED%95%A8%EC%88%98%EB%93%A4)
+3) js 기초 단어, 비동기 프로그래밍<br>
+  [블로그 주소](https://velog.io/@wonssun/js-%EA%B8%B0%EC%B4%88-%EB%8B%A8%EC%96%B4-%EC%A0%95%EB%A6%AC)
 
 <br>
 
@@ -71,6 +71,9 @@ function LoginBtn2() {
   localStorage.setItem('username', LoginInput.value);
 }
 ```
+### 
+
+
 #### 예제 결과값
 <img src="https://github.com/zerossun/Logi_Study/assets/130970089/25b1ebb4-79c5-475e-b4db-9fc996e94569"  width="700" height="370">
 
