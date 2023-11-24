@@ -35,7 +35,7 @@ function DeleteTodo(event) {
 
 // PaintTodo : TODO를 그리는 역할
 
-// 전역변수로 빼서 해봄 -> 기능 자체가 안됨. 그리고 솔직히 지역변수로 사용하고 싶음.
+// 3. 전역변수로 빼서 해봄 -> 기능 자체가 안됨. 그리고 솔직히 지역변수로 사용하고 싶음.
 // const li = document.createElement('li');
 // li.id = listitem.id;
 // li.text = listitem.text;
@@ -66,7 +66,7 @@ function PaintTodo2(listitem) {
   Input.classList.add(LOGIFORM_HIDDEN);
 
   TodoList2.append(li);
-// 현방법
+  // 현방법
   const modify = (event, listitem) => {
     if (Input.value == '') {
       console.log('qwerty1');
@@ -82,29 +82,24 @@ function PaintTodo2(listitem) {
     }
   };
 
-// =====================
-// [도전했던 방법]
-// 1. 각각 이벤트 주기 ->같이 실행됨. 실패
-//   const modify = (event, listitem) => {
-//     console.log('qwerty');
-    
-//     console.log(Mbtn); 
-  
-//   const todoItem = Mbtn.parentElement;
-//   const todoItemTxt = todoItem.text;
-//   Mbtn.innerText = todoItemTxt;
-  
-//     const inputText = event.target.innerText;
-//     const inputMbtn = document.createElement('input');
-//     inputMbtn.value = inputText;
-//     inputMbtn.classList.add('edit-input');
-//   };
+  // =====================
+  // [도전했던 방법]
+  // 1. 각각 이벤트 주기 ->같이 실행됨. 실패
+  //   const modify = (event, listitem) => {
+  //     console.log('qwerty');
+
+  //     console.log(Mbtn);
+
+  //   const todoItem = Mbtn.parentElement;
+  //   const todoItemTxt = todoItem.text;
+  //   Mbtn.innerText = todoItemTxt;
+
+  //     const inputText = event.target.innerText;
+  //     const inputMbtn = document.createElement('input');
+  //     inputMbtn.value = inputText;
+  //     inputMbtn.classList.add('edit-input');
+  //   };
 }
-
-    
-    
-    
-
 
 // =============
 
@@ -147,4 +142,3 @@ if (savedTodos1 != null) {
 }
 
 TodoForm2.addEventListener('submit', todolist);
-

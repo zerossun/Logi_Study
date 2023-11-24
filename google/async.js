@@ -93,3 +93,5 @@ function pickOnlyOne() {
   return Promise.race([getapple(), getmango()]);
 }
 pickOnlyOne().then(console.log);
+
+////then , async 비교

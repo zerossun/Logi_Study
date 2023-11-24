@@ -74,6 +74,18 @@ function modify1(event, listitem) {
     `input[data-id = "${listitem.id}"]`
   );
   console.log('targetInputElement', targetInputElemnt1, inputTemp1); // 왜 안찍히지..?
+  const isHidden = targetInputElemnt1.classList.value === LOGIFORM_HIDDEN;
+  if (isHidden) {
+    targetSpanElemnt1.classList.add(LOGIFORM_HIDDEN);
+    targetInputElemnt1.classList.remove(LOGIFORM_HIDDEN);
+    targetInputElemnt1.value = listitem.text;
+    console.log('가나다라마바사');
+  } else {
+    const newInputValue = targetInputElemnt1.value;
+    targetSpanElemnt1.innerText = newInputValue;
+    targetSpanElemnt1.classList.remove(LOGIFORM_HIDDEN);
+    targetInputElemnt1.classList.add(LOGIFORM_HIDDEN);
+  }
 }
 
 function todolist(e) {
