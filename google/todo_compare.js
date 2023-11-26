@@ -18,6 +18,31 @@ function DeleteTodo(event) {
   SavedTodos1();
 }
 
+function modify(event, listitem) {
+  const targetLiElement = event.target.parentElement;
+  const targetInputElement = targetLiElement.getElementsByTagName('input')[0];
+  const targetSpanElement = targetLiElement.getElementsByTagName('span')[0];
+  const inputTemp = document.querySelector(`input[data-id="${listitem.id}"]`);
+  console.log('targetInputElement', targetInputElement, inputTemp);
+  const isHidden = targetInputElement.classList.value === LOGIFORM_HIDDEN;
+  if (isHidden) {
+    // 편집모드
+
+    targetSpanElement.classList.add(LOGIFORM_HIDDEN);
+    targetInputElement.classList.remove(LOGIFORM_HIDDEN);
+    targetInputElement.value = listitem.text;
+  } else {
+    //실제 수정
+    const newInputValue = targetInputElement.value;
+    //데이터 변경
+    targetSpanElement.innerText = newInputValue;
+    //모양 변경
+    targetSpanElement.classList.remove(LOGIFORM_HIDDEN);
+    targetInputElement.classList.add(LOGIFORM_HIDDEN);
+  }
+}
+
+
 // PaintTodo : TODO를 그리는 역할
 function PaintTodo2(listitem) {
   const li = document.createElement('li');
@@ -27,6 +52,12 @@ function PaintTodo2(listitem) {
   const Xbtn = document.createElement('button');
   const Mbtn = document.createElement('button');
   let Input = document.createElement('input');
+
+
+Input.setAttribute('data-id', listitem.id);
+Input.classList.add(LOGIFORM_HIDDEN);
+
+
   Xbtn.addEventListener('click', DeleteTodo);
 
   span.innerText = li.text;
@@ -41,6 +72,7 @@ function PaintTodo2(listitem) {
   Input.classList.add(LOGIFORM_HIDDEN);
 
   TodoList2.append(li);
+
 
   //   const modify = (event, listitem) => {
   //     if (Input.value == '') {
@@ -60,33 +92,9 @@ function PaintTodo2(listitem) {
 }
 
 // 대리님코드를 보며 비교해보는 시간.
-
-// 정신흐트려질 때마다 뺨 한대
 // 1. 일단, 함수로 변수가 아닌 함수로 따로 뺐음.
 
-function modify1(event, listitem) {
-  const targetLiElement1 = event.target.parentElement;
-  // 왜 부모함수를 지정했나. -> 지금 '수정'버튼이 쥔공 그의 부모는 li이기 때문.
-  const targetInputElemnt1 = targetLiElement1.getElementsByTagName('input')[0];
-  const targetSpanElemnt1 = targetInputElemnt1.getElementsByTagName('span')[0];
-  // 'data-' : 데이터 속성을 일컫음. li.id = listitem.id; 거기서 id만 빼온다구
-  const inputTemp1 = document.querySelector(
-    `input[data-id = "${listitem.id}"]`
-  );
-  console.log('targetInputElement', targetInputElemnt1, inputTemp1); // 왜 안찍히지..?
-  const isHidden = targetInputElemnt1.classList.value === LOGIFORM_HIDDEN;
-  if (isHidden) {
-    targetSpanElemnt1.classList.add(LOGIFORM_HIDDEN);
-    targetInputElemnt1.classList.remove(LOGIFORM_HIDDEN);
-    targetInputElemnt1.value = listitem.text;
-    console.log('가나다라마바사');
-  } else {
-    const newInputValue = targetInputElemnt1.value;
-    targetSpanElemnt1.innerText = newInputValue;
-    targetSpanElemnt1.classList.remove(LOGIFORM_HIDDEN);
-    targetInputElemnt1.classList.add(LOGIFORM_HIDDEN);
-  }
-}
+
 
 function todolist(e) {
   e.preventDefault();
@@ -94,9 +102,12 @@ function todolist(e) {
   const listitem = TodoInput2.value;
   localStorage.setItem('todolist', listitem);
   TodoInput2.value = '';
+
+const id = Date.now();
+
   const listObg = {
     text: listitem,
-    id: Date.now(),
+    id: id,
   };
 
   toDos1.push(listObg);
@@ -106,11 +117,11 @@ function todolist(e) {
 
 const savedTodos1 = localStorage.getItem('todos');
 
-if (savedTodos1 != null) {
-  const obg = JSON.parse(savedTodos1);
-  toDos1 = obg;
-  console.log(obg);
-  obg.forEach(PaintTodo2);
-}
+// if (savedTodos1 != null) {
+//   const obg = JSON.parse(savedTodos1);
+//   toDos1 = obg;
+//   console.log(obg);
+//   obg.forEach(PaintTodo2);
+// }
 
 TodoForm2.addEventListener('submit', todolist);
