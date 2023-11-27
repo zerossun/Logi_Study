@@ -1,5 +1,8 @@
 .hidden {
-  display: none;
+  display: none !important;
+}
+.decorate {
+  text-decoration: line-through;
 }
 .edit-input {
   position: absolute;
@@ -8,4 +11,194 @@
   width: 590px;
   height: 2.8rem;
   margin: 0;
+}
+
+img {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
+  opacity: 80%;
+}
+
+#clock {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  font-size: 2.5rem;
+  color: #fff;
+}
+#quote {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, -5%);
+}
+#quote span {
+  display: block;
+  text-align: left;
+}
+#quote span:last-child {
+  text-align: right;
+}
+
+#weather {
+  position: absolute;
+  top: 3%;
+  right: 1%;
+  transform: translate(-1%, -3%);
+  font-size: 1rem;
+  color: #fff;
+}
+
+#LoginForm {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  font-size: 2.5rem;
+  color: #fff;
+  width: 300px;
+  display: block;
+}
+#LoginForm input,
+button {
+  height: 30px;
+  border-radius: 10px;
+}
+#LoginForm input:first-child {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+#LoginForm input:nth-child(2) {
+  width: 48%;
+  float: left;
+  display: inline-block;
+}
+#signup {
+  width: 48%;
+  float: right;
+  display: inline-block;
+}
+
+#greeting {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -35%);
+  font-size: 2.5rem;
+  color: #fff;
+  width: 300px;
+  text-align: center;
+}
+#logout {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -48%);
+  font-size: 1rem;
+  color: #101010;
+  width: 300px;
+  height: 30px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+#todo_form {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-size: 2.5rem;
+  color: #fff;
+  width: 300px;
+  display: block;
+}
+#todo_form input {
+  width: 300px;
+  height: 30px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+#todo_list {
+  position: absolute;
+  bottom: -85%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  font-size: 1rem;
+  color: #000;
+  list-style-type: none;
+  padding: 0 20px;
+  box-sizing: border-box;
+  width: 300px;
+  display: block;
+  height: 500px;
+}
+#todo_list span {
+  text-align: left;
+  width: 150px;
+  display: inline-block;
+}
+#todo_list li {
+  text-align: left;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 260px;
+}
+#todo_list button {
+  float: right;
+}
+
+.signin_form {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.dom {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  opacity: 50%;
+  z-index: 1;
+}
+.form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+.form input {
+  padding: 6px;
+  box-sizing: border-box;
+}
+.form small {
+  color: red;
+}
+.form label,
+input,
+small {
+  width: 300px;
+  margin: 6px 0;
+  display: block;
+  text-align: left;
 }

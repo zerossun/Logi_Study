@@ -31,6 +31,15 @@ function modify(event, listitem) {
     targetSpanElement.classList.add(LOGIFORM_HIDDEN);
     targetInputElement.classList.remove(LOGIFORM_HIDDEN);
     targetInputElement.value = listitem.text;
+    //데이터 수정
+    // localStorage.getItem('todos');
+    // JSON.parse(localStorage.getItem('todos'));
+    // JSON.parse(localStorage.getItem('todos')).push(toDos1);
+    // JSON.stringify(JSON.parse(localStorage.getItem('todos')));
+    // localStorage.setItem(
+    //   'todos',
+    //   JSON.stringify(JSON.parse(localStorage.getItem('todos')))
+    // );
   } else {
     //실제 수정
     const newInputValue = targetInputElement.value;
@@ -42,7 +51,6 @@ function modify(event, listitem) {
   }
 }
 
-
 // PaintTodo : TODO를 그리는 역할
 function PaintTodo2(listitem) {
   const li = document.createElement('li');
@@ -53,10 +61,8 @@ function PaintTodo2(listitem) {
   const Mbtn = document.createElement('button');
   let Input = document.createElement('input');
 
-
-Input.setAttribute('data-id', listitem.id);
-Input.classList.add(LOGIFORM_HIDDEN);
-
+  Input.setAttribute('data-id', listitem.id);
+  Input.classList.add(LOGIFORM_HIDDEN);
 
   Xbtn.addEventListener('click', DeleteTodo);
 
@@ -72,7 +78,6 @@ Input.classList.add(LOGIFORM_HIDDEN);
   Input.classList.add(LOGIFORM_HIDDEN);
 
   TodoList2.append(li);
-
 
   //   const modify = (event, listitem) => {
   //     if (Input.value == '') {
@@ -94,8 +99,6 @@ Input.classList.add(LOGIFORM_HIDDEN);
 // 대리님코드를 보며 비교해보는 시간.
 // 1. 일단, 함수로 변수가 아닌 함수로 따로 뺐음.
 
-
-
 function todolist(e) {
   e.preventDefault();
 
@@ -103,7 +106,7 @@ function todolist(e) {
   localStorage.setItem('todolist', listitem);
   TodoInput2.value = '';
 
-const id = Date.now();
+  const id = Date.now();
 
   const listObg = {
     text: listitem,
