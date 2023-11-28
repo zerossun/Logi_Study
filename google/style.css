@@ -159,6 +159,8 @@ button {
   float: right;
 }
 
+/* form */
+
 .signin_form {
   position: absolute;
   left: 0;
@@ -187,7 +189,7 @@ button {
   padding: 16px;
   text-align: center;
 }
-.form input {
+/* .form input {
   padding: 6px;
   box-sizing: border-box;
 }
@@ -201,4 +203,63 @@ small {
   margin: 6px 0;
   display: block;
   text-align: left;
+} */
+
+.form-control {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.form-control label {
+  color: #777;
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+}
+
+.form-control input {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  width: 300px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.form-control input:focus {
+  outline: 0;
+  border-color: #777;
+}
+
+.form-control.success input {
+  border-color: var(--success-color);
+}
+
+.form-control.error input {
+  border-color: var(--error-color);
+}
+
+.form-control small {
+  color: var(--error-color);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.form-control.error small {
+  visibility: visible;
+}
+
+.form button {
+  cursor: pointer;
+  background-color: #3498db;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  color: #fff;
+  display: block;
+  font-size: 16px;
+  margin-top: 20px;
+  width: 100%;
 }
