@@ -82,3 +82,27 @@ var toggle = (function outer() {
   };
 })();
 console.log(toggle);
+
+
+//class object
+
+
+//class
+class Person {
+  //constructor
+  constructor(
+    name,age
+  ){
+    this.name = 'ganada';
+    this.age = age;
+  }
+}
+//method
+speak(){
+console.log(`${this.age}: hello:)`)
+}
+//object
+const ganada = new Person('ellei', 20);
+console.log(ganada.age);
+console.log(ganada.name);
+ganada.speak();
