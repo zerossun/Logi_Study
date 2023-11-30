@@ -38,9 +38,9 @@ let names = [
 // });
 
 // 하지만 위의 친구도 옛방식. 이제는 es6방식으로 사용함. => 화살표 함수
-// names.forEach((item) => {
-//   console.log(item);
-// });
+names.forEach((item) => {
+  console.log(item);
+});
 
 // 위에서 말했든 index도 넘겨줌
 // names.forEach((item, index) => {
