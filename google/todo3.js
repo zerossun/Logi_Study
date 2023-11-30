@@ -38,32 +38,49 @@ function modify(event, listitem) {
     targetSpanElement.classList.remove(LOGIFORM_HIDDEN);
     targetInputElement.classList.add(LOGIFORM_HIDDEN);
 
+
+  // 추가한 기능
+
     const id = Date.now();
+    
+    // 수정버튼을 클릭하면 나오는 input의 value값과 현재 시간의 밀리초를 id로 지정하여 변수로 변환
     const listObg2 = {
       text: targetInputElement.value,
       id: id,
     };
-    toDos1.push(listObg2);
+    // 수정한 todolist 배열 끝에 붙여주고 화면에 그려줌
+    // 문제 : 수정 전의 list가 삭제되지 않음.
+    toDos1.push(listObg2); 
     PaintTodo2(listObg2);
+    // 수정버튼의 부모(li)를 변수로 지정후 삭제
     const li3 = event.target.parentElement;
     li3.remove();
-
+    // 원배열의 아이디와 삭제한 부모변수 id(string으로 값이 반환되기 때문에 parseInt로 number로 변환후 비교)갸 다른 것만 반환
     toDos1 = toDos1.filter((toDo) => toDo.id !== parseInt(li3.id));
+    // function SavedTodos1() {  localStorage.setItem('todos', JSON.stringify(toDos1)); }
+    // 로컬스토리지에 저장
     SavedTodos1();
-    console.log('ganada');
   }
 }
 
+// 
 function checkB(e) {
+  // 체크박스의 부모 li 지정
   const targetLiElement = e.target.parentElement;
+  // 리스트 텍스트 지정
   const targetSpanElement = targetLiElement.getElementsByTagName('span')[0];
+  // input 박스의 유형 checkbox로 지정
   let checkbox =
     targetLiElement.getElementsByTagName('input').type == 'checkbox';
+    // 체크 유무 false로 지정 후, if문으로 true로 변환 시, decorate class가 실행되게 기능 적용
   checkbox.checked = false;
   if ((checkbox = true)) {
     targetSpanElement.classList.add('decorate');
   }
 }
+
+// 추가한 기능
+
 
 // PaintTodo : TODO를 그리는 역할
 function PaintTodo2(listitem) {
@@ -87,6 +104,7 @@ function PaintTodo2(listitem) {
   Mbtn.innerText = '수정';
 
   Mbtn.addEventListener('click', (event) => modify(event, listitem));
+  // check 버튼 클릭 시 checkB 함수 실행
   check.addEventListener('click', (e) => checkB(e));
 
   li.append(check, span, Xbtn, Mbtn, Input);

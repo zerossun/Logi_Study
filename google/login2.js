@@ -61,77 +61,45 @@ Singin.addEventListener('click', open);
 
 //form
 
-// const Valid = (input) => {
-//   const re =
-//     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//   if (re.test(input.value)) {
-//     success(input);
-//   } else {
-//     error(input, 'Email is not valid');
-//   }
-// };
-
-// const gap = (inputArr) => {
-//   inputArr.forEach((input) => {
-//     if (input.value === '') {
-//       error(input, `${getFieldName(input)}is requrired`);
-//     } else {
-//       success(input);
-//     }
-//   });
-// };
-
-// const length = (input, min, max) => {
-//   if (input.value.length < min) {
-//     error(input, `${getFieldName(input)} must be at least ${min} characters`);
-//   } else if (input.value.length > max) {
-//     error(
-//       input,
-//       `${getFieldName(input)} must be at less than ${max} characters`
-//     );
-//   }
-// };
-
-//그러면 모든 함수를 유효성 체크로 바꿔서 if문에서 하나라도 false가 뜨면 안되는걸로 바꾸면 되는걸가
-
-// const same = (input1, input2) => {
-//   if (input1.value !== input2.value) {
-//     error(input2, `Password do not match`);
-//   }
-// };
-
-// ① 우선 함수 내 hasError 변수는 에러가 있을 때 true 가 되는 변수로 선언해서 수정해보았습니다.
-// 초기화 시에는 에러가 없으므로 false 이며 유효성 검사에서 탈락하는 경우 true로 바꿔줘야 합니다.
-// ② return 으로 반환한 값은 변수에 저장하거나 함수를 호출한 시점에서 사용해야 합니다.
-// 따라서 submit 이벤트 핸들러에서는 함수 실행 후 반환값을 변수에 저장해서 사용하거나
-// 조건절에 바로 넣어 사용해야 합니다. 또한 A 함수에서 B 함수 내부의 변수를 참조할 수는 없습니다.
-// ③ 코드로 봤을 때는 유효성 검사 실패 시 특정 폼을 숨기는 것 같은데 에러가 하나라도 발생한 상황에서 해당 코드를 실행하기 위해서는 &&(그리고) 연산자가 아닌 ||(또는)   연산자를 사용해야 합니다!
-// 아래 코드로 바꿔서 실행해 보시고 다른 점을 하나씩 비교해 보시면 좋을 것 같습니다! 혹시 아래 코드가 실행이 안 되면 말씀해 주세요!
-
-// haserror = 에러시 true, 초기화때는 fasle겠쥬?
-// 이벤트 핸들러에서는 함수 실행 후 반환값을 변수에 저장해 사용하거나 조건절 바로 넣어 사용해야 함!!
-
+// 클릭하면 폼이 나오게
 function open() {
   Signin_form.classList.remove(HIDDEN);
-  console.log('blah');
 }
+
+// 에러 시 1.input border 빨갛게, 2. 하단 에러메시지 나오는 기능 지정
 const error = (input, message) => {
+  // 매개변수의 부모를 qwerty로 지정
   const qwerty = input.parentElement;
+  // qwerty에 error값 설정
   qwerty.className = 'form-control error';
+  // qwerty의 <small> 지정
   const small = qwerty.querySelector('small');
+  // small에 매개변수 message값 추가
   small.innerText = message;
 };
+
+// 성공 시 1. input border 파랗게
+// 위의 에러와 동일
 const success = (input) => {
   const qwerty = input.parentElement;
   qwerty.className = 'form-control success';
 };
+
+// 에러 시 나오는 문구의 첫글자 대문자로 만드는 기능
+// charAt()을 이용하여 반환된 첫번째 글자엔 대문자 + 제외한 나머지 글자 붙여주기 
 const getFieldName = (input) => {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 };
+
+// input이 공백일 때 공백임을 알려주는 문구가 나오는 기능
 const gap = (inputArr) => {
+  // hasError : 에러가 있을 때 true 가 되는 변수
   let hasError = false;
+  // forEach를 사용하여 값 뽑아냄.
   inputArr.forEach((input) => {
+    // value의 값이 빈것을 변수로 지정하여
     const isInvalid = input.value === '';
+    // if문을 돌려 true일 시에는 error 함수가 실행되게 아닐 시에는 success 함수게 실행되게
     if (isInvalid) {
       error(input, `${getFieldName(input)}is requrired`);
       hasError = true;
@@ -142,11 +110,15 @@ const gap = (inputArr) => {
   console.log(hasError);
   return hasError;
 };
+
+// 이메일 유효성 검사 
 const Valid = (input) => {
   let hasError = false;
+  // 유효성 검사 코드 변수로 지정 후 test(); 를 이용하여 boolean값 반환
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const recheck = re.test(input.value);
+  // if문을 이용하여 recheck가 true 라면 success, 아닐 시 error
   if (recheck) {
     success(input);
   } else {
@@ -156,6 +128,9 @@ const Valid = (input) => {
   console.log(hasError);
   return hasError;
 };
+
+// 텍스트 길이 검사
+// 위와 동일
 const length = (input, min, max) => {
   let hasError = true;
   if (input.value.length < min) {
@@ -171,8 +146,11 @@ const length = (input, min, max) => {
   console.log(hasError);
   return hasError;
 };
+
+// 비밀번호 값이 동일한지에 관한 검사
 const same = (input1, input2) => {
   let hasError = false;
+  // value값이 다르다 라는 값을 변수로 지정하여 if문 돌리기. true라면 error함수 실행
   const inputVal = input1.value !== input2.value;
   if (inputVal) {
     error(input2, `Password do not match`);
@@ -181,8 +159,16 @@ const same = (input1, input2) => {
   console.log(hasError);
   return hasError;
 };
+
+// 폼 제출 시 기능 실행
 form.addEventListener('submit', (e) => {
   e.preventDefault();
+// ② return 으로 반환한 값은 변수에 저장하거나 함수를 호출한 시점에서 사용해야 합니다.
+// 따라서 submit 이벤트 핸들러에서는 함수 실행 후 반환값을 변수에 저장해서 사용하거나
+// 조건절에 바로 넣어 사용해야 합니다. 또한 A 함수에서 B 함수 내부의 변수를 참조할 수는 없습니다.
+// 함수에서 다른 함수의 변수를 참조할 수 없으므로, 함수 실행 후 반환 값 변수로 지정.
+// if문을 이용하여 에러가 하나라도 났을 때 해당코드 실행을 위해 ||(or) 연산자 사용
+// && 사용하면 모든 닶 else로 나옴.
   const hasGapError = gap([username, email, password, password2]);
   const hasUserNameLengthError = length(username, 8, 15);
   const hasPasswordLengthError = length(password, 6, 25);
