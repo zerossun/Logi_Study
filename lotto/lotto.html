@@ -3,14 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/lotto/lotto_css.css" />
     <title>Document</title>
   </head>
   <body>
     <div id="question">
-      Guess 4 digit random number! <br />
-      ** Each number is different.
+      <button id="lottoBtn">click</button>
     </div>
-    <div id="result"></div>
+    <div id="result" class="hidden"></div>
+    <div id="result1" class="hidden"></div>
     <form id="answer_form" action="submit">
       <input id="answer" type="text" />
       <button>submit</button>
@@ -20,5 +21,6 @@
       <span id="remainedChance"></span>
     </div>
     <script src="../lotto/lotto_js.js"></script>
+    <!-- <script src="../lotto/array_study.js"></script> -->
   </body>
 </html>

@@ -123,6 +123,7 @@ let Ceo6 = names.findIndex((item) => {
   return item.startsWith('L');
 });
 console.log(Ceo6);
+
 // ===========================
 // let initialOnly = names.map((item) => {
 //   let splitName = item.split(' '); // 배열의 있는 문자를 기준을 정해주고 자른다.

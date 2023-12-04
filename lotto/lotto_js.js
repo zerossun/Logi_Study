@@ -1,174 +1,88 @@
-// let candiate = Array(45);
-// let fill = candiate.fill();
+const result = document.querySelector('#result');
+const result1 = document.querySelector('#result1');
+const lottoBtn = document.querySelector('#lottoBtn');
 
-// fill.forEach(function (elment, index) {
-//   console.log(elment, index + 1);
-// });
-// console.log(candiate);
+// random 함수 해석:
+// candiate라는 변수에 45개를를 배열해줘라.
+// fill(); 그리구 꽉 채워줘.(이러면 undefined로 꽉채워줌.)
+// map() : index에 1씩 더해서 다시 값 뽑아줘라
+function random(e) {
+  let candiate = Array(45)
+    .fill()
+    .map((item, index) => {
+      return item, index + 1;
+    });
 
-// // 숫자야구
-// var question = document.getElementById('question');
-// var result = document.getElementById('result');
-// var answer_form = document.getElementById('answer_form');
-// var answer = document.getElementById('answer');
-// var remainedChance = document.getElementById('remainedChance');
-// var number_candidate;
-// var number_picked;
-// var wrongAnswerNumbers = 0;
+  // console.log(candiate);
 
-// function random_number() {
-//   number_candidate = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-//   number_picked = [];
-//   for (var i = 0; i < 4; i += 1) {
-//     var picked = number_candidate.splice(
-//       Math.floor(Math.random() * (9 - i)),
-//       1
-//     )[0];
-//     number_picked.push(picked);
-//   }
-// }
+  const random = candiate.sort(() => Math.random() - 0.5);
+  // 배열 랜덤으로 돌리는 방법
+  // 1.배열을 섞는 가장 쉬운방법 : sort();
+  // 2. -0.5를 안 붙이면 랜덤이 되지 않음.그리고 놀랍게도 양수만 뱉음 왜??
+  // 3. Math.random()은 0보다 크고 1보다 작은 난수를 랜덤하게 생성함.
+  // 근데 저기에 -0.5를 하면 양수나 음수를 랜덤하게 뱉음.
+  // 양수만 뱉는 이유는 뇌피셜로 내가 candiate에 1~45 양수로 채워서 그럼.
+  const bonus = candiate[candiate.length - 1];
+  // bonus는 어캐 계산한거지? 이해가 안가네
+  // const lastValue = arr[arr.length - 1]; : 이게 배열을 마지막 값을 읽어오는 거인데
+  // 오오 그러니까 그거네
+  // sort는 원본배열을 변경하니 random변수 내리면 변경된 변수의 마지막 값을 빼오는 거고
+  // 다만, 저 화면에 띄워주는 slice 변수에 slice배열을 넣어서 맨 뒤에가 안 보여져 내가 혼란이 온 거였음!
+  // 고민 해결!!
 
-// random_number();
+  let slice = random.slice(0, 4).sort((a, b) => {
+    return a - b;
+  });
 
-// console.log(number_picked); // 뽑힌 4자리 숫자 확인용
+  let sliceT = slice.map((slice1, index) => {
+    console.log(slice1, index);
+    return slice1;
+  });
+  // console.log(slice1);
+  console.log(sliceT);
+  // slice 변수 해석:
+  // 랜덤배열을 시작부터 4변째 자리 자르는데 sort를 이용해서 순서대로 나열해줘라.
+  console.log(slice);
+  // let sliceI = document.createElement('span');
+  // result.appendChild(sliceI);
+  // sliceI = sliceT;
+  // console.log(sliceI);
 
-// answer.maxLength = 4;
-// answer.focus();
-// remainedChance.innerHTML = 10;
-
-// answer_form.addEventListener('submit', function (event) {
-//   event.preventDefault();
-//   question.textContent = '';
-//   if (answer.value === number_picked.join('')) {
-//     // 정답을 맞췄을 경우
-//     result.textContent = 'Home run!';
-//     answer.value = '';
-//     answer.focus();
-//     random_number();
-//     console.log(number_picked);
-//     wrongAnswerNumbers = 0;
-//     remainedChance.innerHTML = 10;
-//   } else {
-//     var answer_array = answer.value.split('');
-//     var strike = 0;
-//     var ball = 0;
-//     wrongAnswerNumbers += 1;
-//     remainedChance.innerHTML -= 1;
-//     if (wrongAnswerNumbers > 10) {
-//       // 10번 넘게 틀린 경우
-//       result.textContent =
-//         'You missed 10 chances! The answer was ' + number_picked.join('');
-//       answer.value = '';
-//       answer.focus();
-//       random_number();
-//       console.log(number_picked); // 새 문제 확인용
-//       wrongAnswerNumbers = 0;
-//       remainChance.innerHTML = 10;
-//     } else {
-//       // 10번 미만으로 틀린 경우
-//       for (var i = 0; i < 4; i += 1) {
-//         if (Number(answer_array[i]) === number_picked[i]) {
-//           strike += 1;
-//         } else if (number_picked.indexOf(Number(answer_array[i])) > -1) {
-//           ball += 1;
-//         }
-//       }
-//       result.textContent = strike + ' strike ' + ball + ' ball ';
-//       answer.value = '';
-//       answer.focus();
-//     }
-//     console.log(number_picked); // 새 문제 확인용
-//   }
-// });
-
-// sort
-
-// let items = [
-//   { name: 'Edward', value: 21 },
-//   { name: 'Sharpe', value: 37 },
-//   { name: 'And', value: 45 },
-//   { name: 'The', value: -12 },
-//   { name: 'Magnetic', value: 13 },
-//   { name: 'Zeros', value: 37 },
-// ];
-
-// items.sort(function (a, b) {
-//   if (a.value > b.value) {
-//     return 1;
-//   }
-//   if (a.value < b.value) {
-//     return -1;
-//   }
-//   0;
-//   // console.log(items);
-//   return 0;
-// });
-
-// items.sort(function (a, b) {
-//   let nameA = a.name.toUpperCase();
-//   let nameB = b.name.toUpperCase();
-
-//   if (nameA < nameB) {
-//     return -1;
-//   }
-//   if (nameA > nameB) {
-//     return 1;
-//   }
-//   console.log(items);
-//   return 0;
-// });
-
-// 배열 정리
-
-// concat() : 두개 이상의 배열을 병합하는 데 사용
-
-const array1 = ['a', 'b', 'c'];
-const array2 = ['d', 'e', 'f'];
-const array3 = array1.concat(array2);
-console.log(array3);
-// ["a", "b", "c", "d", "e", "f"]
-
-// copyWithin() :
-const array4 = ['a', 'b', 'c', 'd', 'e'];
-console.log(array4.copyWithin(2, 3, 4));
-console.log(array4.copyWithin(1, 3));
-// ['a','a','a','a','a']
-
-//join() : 배열의 모든 요소를 연결해 하나의 문자열로 만듬
-const elment = ['fire', 'air', 'water'];
-console.log(elment.join()); // fire,air,water
-console.log(elment.join('')); // fireairwater
-console.log(elment.join('-')); // fire-air-water
-
-//entries() : 배열의 각 인덱스에 대한 키/값 쌍을 포함하는 배열 반복자
-const array5 = ['a', 'b', 'c '];
-const iterator1 = array5.entries();
-console.log(iterator1.next().value);
-console.log(iterator1.next().value);
-
-// shift() : 첫번째 요소를 제거하고 제거된 요소 반환
-const array6 = [1, 2, 3];
-const firstElement = array6.shift();
-console.log(array6);
-console.log(firstElement);
-
-// slice(): 배열의 내용을 변경합니다아아아아악!!
-const months = ['jan', 'march', 'april', 'june'];
-months.splice(1, 0, 'feb');
-console.log(months);
-
-///////////
-let stringArray = ['blue', 'humpback', 'beluga'];
-let numericStringArray = ['80', '9', '700'];
-let numberArray = [40, 1, 5, 200];
-let mixedNumericArray = ['80', '9', '700', 40, 1, 5, 200];
-
-function compareNumbers(a, b) {
-  return a - b;
+  // console.log(slice[0]);
+  console.log('number', slice, 'bonus', bonus);
+  result.innerText = sliceT;
+  result1.innerText = bonus;
+}
+function hidden(e) {
+  result.classList.remove('hidden');
+  random();
 }
 
-console.log('stringArray:', stringArray.join());
-// stringArray: blue,humpback,beluga
-console.log('Sorted:', stringArray.sort());
-// ['beluga', 'blue', 'humpback']
-console.log('numberArray:', numberArray.join());
+lottoBtn.addEventListener('click', hidden);
+
+function ballCSS(number) {
+  let ball = result;
+  ball.textContent = number;
+  ball.style.display = 'inline-block';
+  ball.style.border = '1px solid black';
+  ball.style.borderRadius = '100%'; // JS에서는 -가 '빼기'이므로 camel표기법으로 대체
+  ball.style.width = '20px';
+  ball.style.height = '20px';
+  ball.style.textAlign = 'center';
+  ball.style.padding = '10px';
+  ball.style.margin = '10px';
+  let backGroundColor; // 여기부터
+  if (number <= 10) {
+    backGroundColor = 'red';
+  } else if (number <= 20) {
+    backGroundColor = 'orange';
+  } else if (number <= 30) {
+    backGroundColor = 'yellow';
+  } else if (number <= 40) {
+    backGroundColor = 'blue';
+  } else {
+    backGroundColor = 'green';
+  }
+  ball.style.background = backGroundColor;
+  ball.style.fontWeight = 'bold'; // 여기까지 추가함.
+}
