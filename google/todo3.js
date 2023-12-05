@@ -38,11 +38,10 @@ function modify(event, listitem) {
     targetSpanElement.classList.remove(LOGIFORM_HIDDEN);
     targetInputElement.classList.add(LOGIFORM_HIDDEN);
 
-
-  // 추가한 기능
+    // 추가한 기능
 
     const id = Date.now();
-    
+
     // 수정버튼을 클릭하면 나오는 input의 value값과 현재 시간의 밀리초를 id로 지정하여 변수로 변환
     const listObg2 = {
       text: targetInputElement.value,
@@ -50,7 +49,7 @@ function modify(event, listitem) {
     };
     // 수정한 todolist 배열 끝에 붙여주고 화면에 그려줌
     // 문제 : 수정 전의 list가 삭제되지 않음.
-    toDos1.push(listObg2); 
+    toDos1.push(listObg2);
     PaintTodo2(listObg2);
     // 수정버튼의 부모(li)를 변수로 지정후 삭제
     const li3 = event.target.parentElement;
@@ -63,7 +62,7 @@ function modify(event, listitem) {
   }
 }
 
-// 
+//
 function checkB(e) {
   // 체크박스의 부모 li 지정
   const targetLiElement = e.target.parentElement;
@@ -72,7 +71,7 @@ function checkB(e) {
   // input 박스의 유형 checkbox로 지정
   let checkbox =
     targetLiElement.getElementsByTagName('input').type == 'checkbox';
-    // 체크 유무 false로 지정 후, if문으로 true로 변환 시, decorate class가 실행되게 기능 적용
+  // 체크 유무 false로 지정 후, if문으로 true로 변환 시, decorate class가 실행되게 기능 적용
   checkbox.checked = false;
   if ((checkbox = true)) {
     targetSpanElement.classList.add('decorate');
@@ -80,7 +79,6 @@ function checkB(e) {
 }
 
 // 추가한 기능
-
 
 // PaintTodo : TODO를 그리는 역할
 function PaintTodo2(listitem) {

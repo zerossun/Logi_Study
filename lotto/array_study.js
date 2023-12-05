@@ -189,6 +189,10 @@ let items1 = [
 // });
 // console.log(items1);
 
+// sort()
+// 1. 콜백함수를 매개변수로 받음
+// 2. 리턴 값이 음수 : 첫번째 요소가 두번째 요소보다 앞에 배치, 양수 : 두번째 요소가 첫번째 요소보다 앞에 배치
+
 items1.sort((a, b) => {
   let nameA1 = a.name.toUpperCase();
   let nameA2 = a.name.toUpperCase();
