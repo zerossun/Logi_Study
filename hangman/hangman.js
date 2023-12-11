@@ -8,7 +8,7 @@ const quiz_img = document.querySelector('.quiz_img');
 const quiz_choice = document.querySelector('.quiz_choice');
 const quiz__desc = document.querySelector('.quiz__desc');
 const next = document.querySelector('.next');
-const score = document.querySelector('.scroe');
+const score = document.querySelector('.score');
 const replay = document.querySelector('.replay');
 
 
@@ -28,7 +28,7 @@ const quiz_Q = [
     quizImg: images[1],
     quizAsw: ['발발타', '잘잘타', '달달타', '팔팔타'],
     quizCho: ' 발발타',
-    aswDesc: '아수라"발발타"...',
+    aswDesc: '아수라 "발발타"...',
   },
   {
     quizImg: images[2],
@@ -137,11 +137,10 @@ const quiz_List = (index) => {
   for(let i =0; i<quizChoiceSpan.length; i++){
     quizChoiceSpan[i].setAttribute("onclick", "choiceSelected(this)");
     // quizChoiceInput.disabled = 'true';
-    console.log(quizChoiceSpan)
+    // console.log(quizChoiceSpan)
   }
 next.classList.add(HIDDEN); 
 quiz__desc.classList.add(HIDDEN);
-
   };
 
 
@@ -152,18 +151,24 @@ quiz_List(quizCount);
 function choiceSelected(answer){
   let userAnsewr = answer.innerText;
   let currentAnswer = quiz_Q[quizCount].quizCho;
+  if(userAnsewr = currentAnswer){
+    // quizScore = quizScore +1; 
+    console.log(quizScore++);
+  }
   next.classList.remove(HIDDEN);
   quiz__desc.classList.remove(HIDDEN);
   console.log(userAnsewr);
   console.log(currentAnswer);
-  if(userAnsewr == currentAnswer){
-    quizScore++; 
-    console.log(quizScore);
-  }
 }
 
 next.addEventListener('click',()=>{
-  quizCount++;
+  if(quizCount == quiz_Q.length -1){
+    next.classList.add(HIDDEN);
+    content.classList.add(HIDDEN);
+    end.classList.remove(HIDDEN);
+  }else{
+    quizCount++;
+  }
   quiz_List(quizCount);
   console.log(quizCount);
   console.log(quizScore);
@@ -180,5 +185,12 @@ function startBtn(e) {
   content.classList.remove(HIDDEN);
 }
 
+score.innerText = `당신의 점수는 ${quizScore} 입니다`;
 
 start.addEventListener('click', startBtn);
+
+replay.addEventListener('click',()=>{
+  content.classList.add(HIDDEN);
+  end.classList.add(HIDDEN);
+  first.classList.remove(HIDDEN);
+})
