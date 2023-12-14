@@ -1,4 +1,4 @@
-// ㅁㅊ 어려운 이유가 있었네 1차원 배열이었네 세상에 서양 빡빡이 죽어 진짜
+// 1차원 배열
 
 // const cells = document.querySelectorAll('.cell');
 // const statusText = document.querySelector('#statusText');
