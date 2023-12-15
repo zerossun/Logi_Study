@@ -5,7 +5,7 @@ const restartBtn = document.querySelector('#restartBtn');
 const winConditions = [
   // 첫번째 행부터 시작
   // 가로
-  [0, 1, 2], 
+  [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
   // 세로
@@ -17,7 +17,11 @@ const winConditions = [
   [2, 4, 6],
 ];
 
-let options = ['', '', '', '', '', '', '', '', ''];
+//let options = ['', '', '', '', '', '', '', '', ''];
+
+const initOptions = Array(8).fill('');
+
+let options = initOptions;
 let currentPlayer = 'X';
 let running = false;
 
@@ -38,8 +42,8 @@ function cellClicked() {
 }
 
 function updateCell(cell, index) {
-  options[index] = currentPlayer; 
-  cell.textContent = currentPlayer; 
+  options[index] = currentPlayer;
+  cell.textContent = currentPlayer;
 }
 
 function changePlayer() {
@@ -62,20 +66,18 @@ function checkWinner() {
       break;
     }
   }
-  if (roundWon) 
-  {
+  if (roundWon) {
     statusText.textContent = `${currentPlayer}wins!`;
     running = false;
-  }
-  else if (!options.includes('')) {
+  } else if (!options.includes('')) {
     statusText.textContent = `Draw!`;
-  } else {   
+  } else {
     changePlayer();
   }
 }
 function restartGame() {
   currentPlayer = 'X';
-  options = ['', '', '', '', '', '', '', '', ''];
+  options = initOptions;
   statusText.textContent = `${currentPlayer}'s turn`;
   cells.forEach((cell) => (cell.textContent = ''));
   running = true;
