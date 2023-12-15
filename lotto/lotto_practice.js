@@ -208,7 +208,6 @@
 // Q. map 반환받은 배열을 각각 빼낼 수 있는 방법이 없을까요?
 // A. map 에서 반환받은 배열을 각각 빼내려면 다시 순환을 해야 하는데 그 전에 처리하는 게 좋음
 
-
 //////////////////////////////////////
 
 const result = document.querySelector('#result');
@@ -225,7 +224,7 @@ const candiates1 = () =>
       return item, index + 1;
     });
 
-// value index 파라미터로 지정 후 
+// value index 파라미터로 지정 후
 const set = (value, index) => {
   //곱한 수 만큼 콜백해줘라
   setTimeout(function callack() {
@@ -241,11 +240,11 @@ const set = (value, index) => {
 
 // 랜덤함수 기능 제작
 function random() {
-  // 45개 배열 함수 변수로 지정 
+  // 45개 배열 함수 변수로 지정
   const candiate = candiates1();
   const random = candiate.sort(() => Math.random() - 0.5);
   // 배열 랜덤으로 돌리는 방법
-  // 1.배열을 섞는 가장 쉬운방법 : sort(); 
+  // 1.배열을 섞는 가장 쉬운방법 : sort();
   // sort() : 배열의 요소를 문자열 순서로 정렬(매개변수 있을시에는 그에 맞게 정렬 / 반환값 새로 정렬됨.)
   // 2. 뒤에 -0.5를 붙이는 이유
   // 3. Math.random()은 0보다 크고 1보다 작은 난수를 랜덤하게 생성함.

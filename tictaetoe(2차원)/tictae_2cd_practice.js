@@ -16,15 +16,18 @@ let turn = 'O';
 //  [td, td, td],
 // ]
 
-// 내가 선택한 td 알아내는 방법. 
+// 내가 선택한 td 알아내는 방법.
 // forEach로 이중반복문 돌려서 찾기
 // target은 td중에 하나
 // 하나씩 비교해보고 index(ri, ci)가 몇번째줄 몇번째 칸인지 알려줌
 const checkWinner = (target) => {
   let rowIndex;
   let cellIndex;
+  // 열의 숫자와 인덱스를 넘겨줌
   rows.forEach((row, ri) => {
+    // 셀의 숫자와 인덱스를 넘겨줌
     row.forEach((cell, ci) => {
+      // 만약 셀의 수와
       if (cell === target) {
         rowIndex = ri;
         cellIndex = ci;

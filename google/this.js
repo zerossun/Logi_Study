@@ -128,3 +128,12 @@ ageTest.getAgeList();
 // this를 쓰고 싶을 때 어캐 써야 함?
 // this를 쓰고 싶을 때 일반함수를 써라. .bind로 원하는 함수 지정할 수 있음
 // 함수 안에 있는 함수같은 경우 같은 this를 쓴다면 화살표함수 사용
+
+let apple = '독이 든 사과';
+let home = {
+  apple: '맛있는 사과',
+  eatApple: eatAppleFn,
+};
+function eatAppleFn() {
+  console;
+}
