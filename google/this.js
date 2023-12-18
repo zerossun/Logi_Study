@@ -137,3 +137,15 @@ let home = {
 function eatAppleFn() {
   console;
 }
+
+let group = {
+  title: '1모둠',
+  students: ['보라', '호진', '지민'],
+
+  title2: this.title,
+  title3() {
+    // console.log(this.title);
+  },
+};
+console.log(group.title2);
+group.title3();

@@ -86,10 +86,15 @@ const success = (input) => {
 };
 
 // 에러 시 나오는 문구의 첫글자 대문자로 만드는 기능
-// charAt()을 이용하여 반환된 첫번째 글자엔 대문자 + 제외한 나머지 글자 붙여주기 
+// charAt()을 이용하여 반환된 첫번째 글자엔 대문자 + 제외한 나머지 글자 붙여주기
 const getFieldName = (input) => {
-  return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+  return input.id.slice(0, 1).toUpperCase() + input.id.slice(1);
 };
+
+// console.log(getFieldName(input));
+// const getFieldName = (input) => {
+//   return input.id.slice(0, 1).toUpperCase() + input.id.splice(1);
+// };
 
 // input이 공백일 때 공백임을 알려주는 문구가 나오는 기능
 const gap = (inputArr) => {
@@ -111,7 +116,7 @@ const gap = (inputArr) => {
   return hasError;
 };
 
-// 이메일 유효성 검사 
+// 이메일 유효성 검사
 const Valid = (input) => {
   let hasError = false;
   // 유효성 검사 코드 변수로 지정 후 test(); 를 이용하여 boolean값 반환
@@ -163,9 +168,9 @@ const same = (input1, input2) => {
 // 폼 제출 시 기능 실행
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-// 함수에서 다른 함수의 변수를 참조할 수 없으므로, 함수 실행 후 반환 값 변수로 지정.
-// if문을 이용하여 에러가 하나라도 났을 때 해당코드 실행을 위해 ||(or) 연산자 사용
-// && 사용하면 모든 닶 else로 나옴.
+  // 함수에서 다른 함수의 변수를 참조할 수 없으므로, 함수 실행 후 반환 값 변수로 지정.
+  // if문을 이용하여 에러가 하나라도 났을 때 해당코드 실행을 위해 ||(or) 연산자 사용
+  // && 사용하면 모든 닶 else로 나옴.
   const hasGapError = gap([username, email, password, password2]);
   const hasUserNameLengthError = length(username, 8, 15);
   const hasPasswordLengthError = length(password, 6, 25);

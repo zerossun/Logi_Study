@@ -5,8 +5,21 @@ const bonusBtn = document.querySelector('#bonusBtn');
 
 const RAN = 'ran';
 
+// 빈배열 제작 및 변수로 지정
+let defaultChoicedNums = [];
+let choicedNums = defaultChoicedNums;
+
+// 변수 파라미터 값이랑 같다고 지정
+const setChoicedNums = (paramChoiceNums) => {
+  choicedNums = paramChoiceNums;
+};
+// 랜덤값 빼서 변수로 지정
+const sortRandomArray = (paramArray) => {
+  return paramArray.sort(() => Math.random() - 0.5);
+};
+
 const candiates1 = () =>
-  Array(45)
+  Array(8)
     .fill()
     .map((item, index) => {
       return item, index + 1;
@@ -21,12 +34,27 @@ const set = (value, index) => {
   }, (index + 1) * 1000);
 };
 
+// function random() {
+//   const candiate = candiates1();
+//   const random = sortRandomArray(candiate);
+//   console.log('random', random);
+//   let slice = random.slice(0, 6);
+//   setChoicedNums(slice);
+//   console.log(setChoicedNums(slice));
+
+//   for (let i = 0; i < slice.length; i++) {
+//     set(slice[i], i);
+//   }
+// }
+
 function random() {
   const candiate = candiates1();
-  const random = candiate.sort(() => Math.random() - 0.5);
-  let slice = random.slice(0, 4).sort((a, b) => {
-    return a - b;
-  });
+  const random = sortRandomArray(candiate);
+  console.log('random', random);
+
+  let slice = random.slice(0, 6);
+  // 선택된 번호들을 기억
+  setChoicedNums(slice);
 
   for (let i = 0; i < slice.length; i++) {
     set(slice[i], i);
@@ -38,6 +66,10 @@ function hidden() {
   random();
 }
 function bonusB() {
+  if (choicedNums.length === 0) {
+    window.alert('아직 번호들을 뽑지 않으셨습니다.');
+    return;
+  }
   const candiate = candiates1();
   const bonus = candiate[candiate.length - 1];
   result1.classList.add(RAN);
@@ -224,10 +256,70 @@ simple(13); // 13
 
 const arr = [5, 6, 13, 0, 1, 18, 23];
 
-
 // 아니 sort식이랑 똑같이 써도 같은 값이 나오는데
 // reduce는 뭐임 진자. 얘는 그냥 진자 배열의 합을 더한다고 생각해도 되는거야??
-const sum = arr.reduce((a, b) => 
 
-);
-console.log(sum);
+//includes
+// 배열의 항목에 특정 값이 포함되어 있는지를 판단하여 적절히 true 또는 false를 반환
+const arr3 = ['a', 'b', 'c'];
+
+console.log(arr3.includes('a', -100));
+console.log(arr3.includes('b', -100));
+console.log(arr3.includes('c', -100));
+console.log(arr3.includes('c', -2));
+console.log(choicedNums);
+
+//filter
+
+const fruits = ['apple', 'banana', 'grapes', 'mango', 'orange'];
+
+function filterItem(arr, query) {
+  return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+}
+
+console.log(filterItem(fruits, 'ap'));
+console.log(filterItem(fruits, 'an'));
+
+// 유효하지 않은 항목 걸러내기
+const arr4 = [
+  { id: 15 },
+  { id: -1 },
+  { id: 0 },
+  { id: 3 },
+  { id: 12.2 },
+  {},
+  { id: null },
+  { id: NaN },
+  { id: 'undefined' },
+];
+
+let invalidEntries = 0;
+
+function filterByID(item) {
+  if (Number.isFinite(item.id) && item.id !== 0) {
+    return true;
+  }
+  invalidEntries++;
+  return false;
+}
+
+const arrByID = arr4.filter(filterByID);
+
+console.log('필터링된 배열\n', arrByID);
+// 필터링된 배열
+// [{ id: 15 }, { id: -1 }, { id: 3 }, { id: 12.2 }]
+
+console.log('유효하지 않은 항목의 수 =', invalidEntries);
+// 유효하지 않은 항목의 수 = 5
+const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+function isPrime(num) {
+  for (let i = 2; num > i; i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return num > 1;
+}
+
+console.log(array.filter(isPrime));
