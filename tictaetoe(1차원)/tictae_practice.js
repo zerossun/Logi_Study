@@ -6,7 +6,6 @@ const cells = document.querySelectorAll('.cell');
 const statusText = document.querySelector('#statusText');
 const restartBtn = document.querySelector('#restartBtn');
 
-
 ///// * 필요한 변수들 *
 // 1. html 인덱스와 연결할 변수 생성
 // 2. 자리를 표시할 빈배열 생성
@@ -17,7 +16,7 @@ const restartBtn = document.querySelector('#restartBtn');
 const winConditions = [
   // 첫번째 행부터 시작
   // 가로
-  [0, 1, 2], 
+  [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
   // 세로
@@ -65,7 +64,6 @@ function cellClicked() {
   checkWinner();
 }
 
-
 // 업데이트 셀 :
 function updateCell(cell, index) {
   options[index] = currentPlayer; // <- 자리가 x or o 인지를 인덱스에 기록해줌(없으면 누가 이긴지 계산 안 됨)
@@ -86,7 +84,7 @@ function checkWinner() {
   let roundWon = false; // true로도 변경해도 됨. 다만 if문에서 roundWon != true로 같이 변경해야됨.
 
   // for문을 이용하여 배열 내의 모든 승리 조건 반복
-  
+
   for (let i = 0; i < winConditions.length; i++) {
     // 승리 조건 내의 각 내부 배열을 반복하지만 이러한 각 배열을 임시 변수 내에 저장
     // 행내의 배열을 각각 변수로 지정
@@ -108,8 +106,7 @@ function checkWinner() {
       break;
     }
   }
-  if (roundWon) 
-  {
+  if (roundWon) {
     // 이겼다면 statusText 텍스트를 `${currentPlayer}wins!`해줘라.
     statusText.textContent = `${currentPlayer}wins!`;
     // running = false;있어야 게임이 끝나고 칸 클릭했을 때 표시가 생기지 않음.
@@ -136,4 +133,3 @@ function restartGame() {
   cells.forEach((cell) => (cell.textContent = ''));
   running = true;
 }
-
