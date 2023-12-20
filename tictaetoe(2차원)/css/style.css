@@ -40,4 +40,8 @@ td {
   width: 45%;
   border: 0;
   padding: 6px;
+}
+
+.display {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

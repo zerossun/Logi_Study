@@ -13,7 +13,7 @@ const restart = document.createElement('button');
 const three = document.createElement('button');
 const five = document.createElement('button');
 const resultTxt = document.createElement('div');
-let rows = [];
+const rows = [];
 
 // turn의 기본값 o으로 잡음.
 let turn = 'O';
@@ -130,12 +130,7 @@ function resrtBtn() {
   Table.addEventListener('click', callback);
   Table5.addEventListener('click', callback);
 }
-
-// 3x3
-function threeBtn() {
-  console.log('threeBtn');
-  Table.style.display = 'table';
-  Table5.style.display = 'none';
+const triple = () => {
   for (let i = 1; i <= 3; i++) {
     const Tr = document.createElement('tr');
     const cells = [];
@@ -147,27 +142,42 @@ function threeBtn() {
     rows.push(cells);
     Table.append(Tr);
   }
-  three.removeEventListener('click', threeBtn);
+};
+// 3x3
+function threeBtn() {
+  triple();
+  resrtBtn();
+  turn = 'O';
+  rows = [];
+  console.log(rows);
+  console.log('threeBtn');
+  Table.style.display = 'table';
+  Table5.style.display = 'none';
 }
 
-// 5x5
-for (let i = 1; i <= 5; i++) {
-  const Tr5 = document.createElement('tr');
-  const cells = [];
-  for (let j = 1; j <= 5; j++) {
-    const Td5 = document.createElement('td');
-    cells.push(Td5);
-    Tr5.append(Td5);
+const dodouble = () => {
+  for (let i = 1; i <= 5; i++) {
+    const Tr5 = document.createElement('tr');
+    const cells = [];
+    for (let j = 1; j <= 5; j++) {
+      const Td5 = document.createElement('td');
+      cells.push(Td5);
+      Tr5.append(Td5);
+    }
+    rows.push(cells);
+    Table5.append(Tr5);
   }
-  rows.push(cells);
-  Table5.append(Tr5);
-}
+};
 function fiveBtn() {
+  dodouble();
+  resrtBtn();
+  turn = 'O';
+  rows = [];
+  console.log(rows);
   console.log('fiveBtn');
   Table.style.display = 'none';
   Table5.style.display = 'table';
-
-  five.removeEventListener('click', fiveBtn);
+  // 5x5
 }
 
 // body의 자식요소로 지정
