@@ -3,7 +3,7 @@ const LoginForm = document.querySelector("#LoginForm")
 const loginInput = document.querySelector("#LoginForm input:first-child");
 const greeting = document.querySelector("#greeting");
 
-const HIDDEN_CLASSLIST = "hidden";
+const HIDDEN_ = "hidden";
 const USERNAME = "username";
 
 function connctBtn(e){

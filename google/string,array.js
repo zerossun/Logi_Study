@@ -7,7 +7,7 @@ const animals1 = 'qwertyuasdf'; // 문자열
 
 function qwerty() {
   // return animals.slice(1, 3); // [ 'bison', 'camel' ]
-  return animals.splice(1, 3); //   TypeError: animals1.splice is not a function
+  return animals.splice(1, 3); //  [ 'bison', 'camel', 'duck' ]
 }
 console.log(qwerty());
 console.log(animals);
