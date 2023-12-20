@@ -1,0 +1,41 @@
+td {
+  width: 75px;
+  height: 75px;
+  border: 2px solid;
+  box-shadow: 0 0 0 2px;
+  line-height: 75px;
+  font-size: 50px;
+  cursor: pointer;
+  text-align: center;
+}
+#gameContainer {
+  text-align: center;
+}
+#cellContainer {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  width: 225px;
+  margin: auto;
+}
+.td {
+  display: block;
+}
+.container {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  width: 420px;
+  & div {
+    width: 100%;
+  }
+  .start {
+    & button {
+      width: 45%;
+      border: 0;
+      padding: 6px;
+    }
+  }
+}

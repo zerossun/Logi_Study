@@ -201,20 +201,23 @@ const callback = (e) => {
 };
 
 const callback5 = (e) => {
+  // 빈칸이 아니다.
   if (e.target.textContent) {
     alert('빈칸이 아닙니다.');
     return;
   }
-  console.log('빈칸입니다.');
+  // 빈칸이다
+  // 턴 돌리기
   e.target.textContent = turn;
-
-  if (checkWinner5(e.target)) {
+  if (checkWinner(e.target)) {
     resultTxt.innerText = `${turn}님이 승리`;
-    Table5.removeEventListener('click', callback);
+    Table.removeEventListener('click', callback);
     return;
   }
+
   // 무승부
   let count = 0;
+  // forEach로 행을 하나씩 뿌리고, 또 cell을 하나씩 뿌린다. 클릭 시마다 1씩 올라가게
   rows.forEach((row) => {
     row.forEach((cell) => {
       if (cell.textContent) {

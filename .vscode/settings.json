@@ -1,4 +1,19 @@
 {
   "files.autoSave": "off",
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "liveSassCompile.settings.autoprefix": [
+
+  ]
+}
+
+{
+  "liveSassCompile.settings.generateMap": false, // 만일 .map 파일 생성을 끄고 싶다면
+  "liveSassCompile.settings.formats": [
+  {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "~/../"
+  }
+  ],
+  "liveServer.settings.donotShowInfoMsg": true
 }

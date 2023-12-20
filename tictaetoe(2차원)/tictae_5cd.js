@@ -1,6 +1,7 @@
 // 2차원 배열
 // 행과 열을 각각 나눠서 2차원 배열
-
+// 5x5 게임 기능 추가
+// 중복되는 코드가 너무 많다. 중복되는 코드 리팩터링 원함.
 // html 영역 지정
 const { body } = document;
 const container = document.createElement('div');
@@ -267,7 +268,7 @@ three.addEventListener('click', threeBtn);
 five.addEventListener('click', fiveBtn);
 
 start.classList.add('start');
-
+container.classList.add('container');
 restart.innerText = 'restart';
 three.innerText = '3x3';
 five.innerText = '5x5';
