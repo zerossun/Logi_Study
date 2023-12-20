@@ -1,12 +1,22 @@
 td {
-  width: 75px;
-  height: 75px;
-  border: 2px solid;
-  box-shadow: 0 0 0 2px;
-  line-height: 75px;
-  font-size: 50px;
-  cursor: pointer;
-  text-align: center;
+  // width: 75px;
+  // height: 75px;
+  // border: 2px solid;
+  // box-shadow: 0 0 0 2px;
+  // line-height: 75px;
+  // font-size: 50px;
+  // cursor: pointer;
+  // text-align: center;
+  
+
+  width: 120px;
+  height: 120px;
+  border: 1px solid #D3D3D3;
+  background-color: #F5F5F5;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #gameContainer {
   text-align: center;
@@ -22,12 +32,13 @@ td {
 }
 .container {
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
   text-align: center;
-  width: 420px;
+  width: 375px;
+  height: 375px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+
   & div {
     width: 100%;
   }
@@ -42,3 +53,55 @@ td {
 .display {
   display: none;
 }
+
+
+// body {  
+//   font-family: 'Poppins', sans-serif;
+//   color: #000000;
+// }
+
+// h1 {
+//   text-align: center;
+// }
+
+// #board {
+//   margin-left: auto;
+//   margin-right: auto;
+//   width: 375px;
+//   height: 375px;
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   grid-gap: 5px;
+// }
+
+// .square {
+//   width: 120px;
+//   height: 120px;
+//   border: 1px solid #D3D3D3;
+//   background-color: #F5F5F5;
+//   font-size: 40px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .square:hover {
+//   background-color: #FFFFE0;
+// }
+
+// #restartButton {
+//   display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+//   height: 40px;
+//   width: 150px;
+//   background-color: #FFFFFF;
+//   border: 1px solid #000000;
+//   border-radius: 40px;
+//   font-size: 18px;
+// }
+
+// #restartButton:hover {
+//   background-color: #000000;
+//   color: #FFFFFF;
+// }

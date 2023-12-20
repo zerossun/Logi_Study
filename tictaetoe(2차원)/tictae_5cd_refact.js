@@ -39,10 +39,10 @@ const comPare = (target) => {
 };
 
 const checkWinner = (target) => {
-  console.log('checkWinner');
   const { rowIndex, cellIndex } = comPare(target);
   // 행 체크(rowIndex의 cell 순회)
   //rowFilled = 빈배열(rows)[rowindex]랄 순회하면서 모든 cell이 같은 텍스트로 채워졌는지 체크
+  console.log(rows[rowIndex]);
   const rowFilled = rows[rowIndex].every((cell) => cell.textContent === turn);
   // 열 체크
   // columnFilled 빈배열(rows)을 순회하면서 모든 row[cellIndex] 같은 텍스트로 채워졌는지 체크
@@ -78,8 +78,9 @@ const checkWinner = (target) => {
   );
 };
 
+
+
 const callback = (e) => {
-  console.log('callback');
   if (e.target.textContent) {
     alert('빈칸이 아닙니다.');
     return;
@@ -130,33 +131,51 @@ function resrtBtn() {
   Table.addEventListener('click', callback);
   Table5.addEventListener('click', callback);
 }
-const triple = () => {
-  for (let i = 1; i <= 3; i++) {
-    const Tr = document.createElement('tr');
-    const cells = [];
-    for (let j = 1; j <= 3; j++) {
-      const Td = document.createElement('td');
-      cells.push(Td);
-      Tr.append(Td);
-    }
-    rows.push(cells);
-    Table.append(Tr);
-  }
-};
+
 // 3x3
-function threeBtn() {
-  triple();
-  resrtBtn();
-  turn = 'O';
-  rows = [];
+for (let i = 1; i <= 3; i++) {
+  const Tr = document.createElement('tr');
+  const cells = [];
+  for (let j = 1; j <= 3; j++) {
+    const Td = document.createElement('td');
+    cells.push(Td);
+    Tr.append(Td);
+  }
+  rows.push(cells);
   console.log(rows);
-  console.log('threeBtn');
+  Table.append(Tr);
+}
+function threeBtn() {
+  let rows = [];
+  rows.forEach((row) => {
+    row.forEach((cell) => {
+      cell.textContent = '';
+    });
+    row.textContent = '';
+  });
+  resrtBtn();
+  // rows.splice(0,3);
   Table.style.display = 'table';
   Table5.style.display = 'none';
 }
 
-const dodouble = () => {
+
+function fiveBtn() {
+  // let rows = [];
+  rows.forEach((row) => {
+    row.forEach((cell) => {
+      cell.textContent = '';
+    });
+    row.textContent = '';
+  });
   for (let i = 1; i <= 5; i++) {
+    let rows = [];
+  rows.forEach((row) => {
+    row.forEach((cell) => {
+      cell.textContent = '';
+    });
+    row.textContent = '';
+  });
     const Tr5 = document.createElement('tr');
     const cells = [];
     for (let j = 1; j <= 5; j++) {
@@ -167,14 +186,10 @@ const dodouble = () => {
     rows.push(cells);
     Table5.append(Tr5);
   }
-};
-function fiveBtn() {
-  dodouble();
+  
   resrtBtn();
-  turn = 'O';
-  rows = [];
+  // rows.splice(4,7);
   console.log(rows);
-  console.log('fiveBtn');
   Table.style.display = 'none';
   Table5.style.display = 'table';
   // 5x5
@@ -186,6 +201,9 @@ Table5.addEventListener('click', callback);
 restart.addEventListener('click', resrtBtn);
 three.addEventListener('click', threeBtn);
 five.addEventListener('click', fiveBtn);
+
+
+
 
 start.classList.add('start');
 container.classList.add('container');
