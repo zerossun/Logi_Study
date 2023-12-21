@@ -78,8 +78,6 @@ const checkWinner = (target) => {
   );
 };
 
-
-
 const callback = (e) => {
   if (e.target.textContent) {
     alert('빈칸이 아닙니다.');
@@ -154,14 +152,12 @@ function threeBtn() {
     row.textContent = '';
   });
   resrtBtn();
-  // rows.splice(0,3);
   Table.style.display = 'table';
   Table5.style.display = 'none';
 }
 
-
 function fiveBtn() {
-  // let rows = [];
+  let rows = [];
   rows.forEach((row) => {
     row.forEach((cell) => {
       cell.textContent = '';
@@ -170,14 +166,8 @@ function fiveBtn() {
   });
   for (let i = 1; i <= 5; i++) {
     let rows = [];
-  rows.forEach((row) => {
-    row.forEach((cell) => {
-      cell.textContent = '';
-    });
-    row.textContent = '';
-  });
     const Tr5 = document.createElement('tr');
-    const cells = [];
+    let cells = [];
     for (let j = 1; j <= 5; j++) {
       const Td5 = document.createElement('td');
       cells.push(Td5);
@@ -186,10 +176,8 @@ function fiveBtn() {
     rows.push(cells);
     Table5.append(Tr5);
   }
-  
+
   resrtBtn();
-  // rows.splice(4,7);
-  console.log(rows);
   Table.style.display = 'none';
   Table5.style.display = 'table';
   // 5x5
@@ -201,9 +189,6 @@ Table5.addEventListener('click', callback);
 restart.addEventListener('click', resrtBtn);
 three.addEventListener('click', threeBtn);
 five.addEventListener('click', fiveBtn);
-
-
-
 
 start.classList.add('start');
 container.classList.add('container');
