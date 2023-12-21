@@ -38,10 +38,16 @@ const comPare = (target) => {
   return { rowIndex, cellIndex };
 };
 
+/**
+ *
+ * @param {callback 함수에서 클릭한 이벤트 타켓} target
+ * @returns 이겼는지 여부 불린값
+ */
 const checkWinner = (target) => {
   console.log('checkWinner');
   const { rowIndex, cellIndex } = comPare(target);
   // 행 체크(rowIndex의 cell 순회)
+
   //rowFilled = 빈배열(rows)[rowindex]랄 순회하면서 모든 cell이 같은 텍스트로 채워졌는지 체크
   const rowFilled = rows[rowIndex].every((cell) => cell.textContent === turn);
   // 열 체크
@@ -78,16 +84,24 @@ const checkWinner = (target) => {
   );
 };
 
-const callback = (e) => {
+/**
+ *
+ * @param {테이블에서 발생한 이벤트} event
+ * @returns
+ */
+const callback = (event) => {
   console.log('callback');
-  if (e.target.textContent) {
+  console.log(event.target);
+  if (event.target.textContent) {
     alert('빈칸이 아닙니다.');
     return;
   }
 
-  e.target.textContent = turn;
-  if (checkWinner(e.target)) {
+  event.target.textContent = turn;
+  if (checkWinner(event.target)) {
     resultTxt.innerText = `${turn}님이 승리`;
+    three.removeEventListener('click', onThreeBtnClick);
+    five.removeEventListener('click', onFiveBtnClick);
     Table.removeEventListener('click', callback);
     Table5.removeEventListener('click', callback);
     return;
@@ -119,8 +133,11 @@ const callback = (e) => {
   turn = turn === 'O' ? 'X' : 'O';
 };
 
-function resrtBtn() {
-  console.log('resrtBtn');
+/**
+ * 초기화 버튼 클릭 핸들러
+ */
+function onResetBtnClcik() {
+  console.log('resetBtn clicked!');
   rows.forEach((row) => {
     row.forEach((cell) => {
       cell.textContent = '';
@@ -129,53 +146,93 @@ function resrtBtn() {
   resultTxt.innerText = ``;
   Table.addEventListener('click', callback);
   Table5.addEventListener('click', callback);
+  three.addEventListener('click', onThreeBtnClick);
+  five.addEventListener('click', onFiveBtnClick);
 }
 
-// 3x3
-function threeBtn() {
-  console.log('threeBtn');
+/**
+ * tr 엘리먼트 배열 및 rows 생성 함수
+ * @param {number} length
+ */
+function createTableRows(length) {
+  const tableRows = [];
+  const rows = [];
+
+  for (let i = 1; i <= length; i++) {
+    const trElement = document.createElement('tr');
+    const tableCells = [];
+    for (let j = 1; j <= length; j++) {
+      const tdElement = document.createElement('td');
+      tableCells.push(tdElement);
+      trElement.append(tdElement);
+    }
+    tableRows.push(trElement);
+    rows.push(tableCells);
+  }
+
+  return { tableRows, rows };
+}
+
+/**
+ *
+ * @param {Table 엘리먼트} tableElement
+ * @param {Td 엘리먼트를 appen 한 tr 엘리먼트 배열} tableRows
+ */
+function initializeTable(tableElement, tableRows) {
+  const length = tableElement.childElementCount;
+
+  for (let i = 0; i < length; i++) {
+    tableElement.removeChild(tableElement.childNodes.item(0));
+  }
+
+  tableRows.forEach((row) => tableElement.append(row));
+
+  tableElement.addEventListener('click', callback);
+}
+
+/**
+ * 3x3 버튼 클릭 핸들러
+ * 특정 이벤트에 대한 핸들러의 경우 앞에 `on` 이나 `handle` 등의 접두어를 써주시는 게 좋습니다.
+ */
+function onThreeBtnClick() {
+  console.log('threeBtn clicked!');
   Table.style.display = 'table';
   Table5.style.display = 'none';
-  for (let i = 1; i <= 3; i++) {
-    const Tr = document.createElement('tr');
-    const cells = [];
-    for (let j = 1; j <= 3; j++) {
-      const Td = document.createElement('td');
-      cells.push(Td);
-      Tr.append(Td);
-    }
-    rows.push(cells);
-    Table.append(Tr);
-  }
-  three.removeEventListener('click', threeBtn);
+  const { rows: newRows, tableRows } = createTableRows(3);
+
+  // rows 초기화
+  rows = newRows;
+
+  initializeTable(Table, tableRows);
 }
 
-// 5x5
-for (let i = 1; i <= 5; i++) {
-  const Tr5 = document.createElement('tr');
-  const cells = [];
-  for (let j = 1; j <= 5; j++) {
-    const Td5 = document.createElement('td');
-    cells.push(Td5);
-    Tr5.append(Td5);
-  }
-  rows.push(cells);
-  Table5.append(Tr5);
-}
-function fiveBtn() {
-  console.log('fiveBtn');
+/**
+ * 5x5 버튼 클릭 핸들러
+ */
+function onFiveBtnClick() {
+  console.log('fiveBtn clicked!');
   Table.style.display = 'none';
   Table5.style.display = 'table';
+  const { rows: newRows, tableRows } = createTableRows(5);
 
-  five.removeEventListener('click', fiveBtn);
+  // rows 초기화
+  rows = newRows;
+
+  initializeTable(Table5, tableRows);
+}
+
+/**
+ * 시작 함수, 5x5 테이블 생성
+ */
+function init() {
+  onFiveBtnClick();
 }
 
 // body의 자식요소로 지정
-Table.addEventListener('click', callback);
-Table5.addEventListener('click', callback);
-restart.addEventListener('click', resrtBtn);
-three.addEventListener('click', threeBtn);
-five.addEventListener('click', fiveBtn);
+
+restart.addEventListener('click', onResetBtnClcik);
+three.addEventListener('click', onThreeBtnClick);
+five.addEventListener('click', onFiveBtnClick);
 
 start.classList.add('start');
 container.classList.add('container');
@@ -187,3 +244,5 @@ body.append(container);
 container.append(start, Table, Table5, Result);
 start.append(startTxt, three, five);
 Result.append(resultTxt, restart);
+
+init();
