@@ -42,3 +42,43 @@ console.log(str.substring(2)); // 'cdefghij'
 
 // 음수로 시작하면 0으로 넘겨진 것처럼 작동함. 조심할 요소
 console.log(str.substring(-2, 5)); // 'abcde'
+
+/**
+ * 구조분해 할당
+ */
+
+// let arr = ['john', 'smith'];
+// let [firstName, surName] = arr;
+// console.log(firstName);
+// console.log(surName);
+
+let user = {
+  name: 'John',
+  years: 30,
+};
+
+let { name, years: age, isAdmin = false } = user;
+
+console.log(user);
+console.log(isAdmin);
+
+let salaries = {
+  John: 100,
+  Pete: 300,
+  Mary: 250,
+};
+
+function topSalary(salaries) {
+  let maxSalary = 0;
+  let maxName = null;
+
+  for (const [name, salary] of Object.entries(salaries)) {
+    if (maxSalary < salary) {
+      maxSalary = salary;
+      maxName = name;
+    }
+  }
+  return maxName;
+}
+
+console.log(topSalary(salaries));
