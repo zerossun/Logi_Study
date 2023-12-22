@@ -86,15 +86,22 @@ const success = (input) => {
 };
 
 // 에러 시 나오는 문구의 첫글자 대문자로 만드는 기능
-// charAt()을 이용하여 반환된 첫번째 글자엔 대문자 + 제외한 나머지 글자 붙여주기
-const getFieldName = (input) => {
-  return input.id.slice(0, 1).toUpperCase() + input.id.slice(1);
-};
+// input.id = Username, Email 등 문자열
+// const getFieldName = (input) => {
+//   return input.id.slice(0, 1).toUpperCase() + input.id.slice(1);
+// };
 
-// console.log(getFieldName(input));
 // const getFieldName = (input) => {
 //   return input.id.slice(0, 1).toUpperCase() + input.id.splice(1);
 // };
+
+// const getFieldName = (input) => {
+//   return input.id.slice(0, 1).toUpperCase() + input.id.substr(1);
+// };
+
+const getFieldName = (input) => {
+  return input.id.slice(0, 1).toUpperCase() + input.id.substring(1);
+};
 
 // input이 공백일 때 공백임을 알려주는 문구가 나오는 기능
 const gap = (inputArr) => {
