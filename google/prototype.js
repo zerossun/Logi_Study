@@ -321,6 +321,6 @@ class User3 {
     this.name = name;
   }
   get name() {
-    re;
+    return this._name;
   }
 }
