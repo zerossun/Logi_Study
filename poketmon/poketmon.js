@@ -1,92 +1,102 @@
-// let pokemons = [];
-// const poke_container = document.getElementById('poke_container');
-// const url = 'https://pokeapi.co/api/v2/pokemon';
-// const pokemon_num = 151;
-// const search = document.getElementById('search');
-// const form = document.getElementById('form');
-
-// const fetchPokemons = async () => {
-//   for (let i = 1; i <= pokemon_num; i++) {
-//     await getALLpokemon(i);
-//   }
-//   pokemons.forEach((pokemon) => createpokemonCard(pokemon));
-// };
-
-// const removePokemon = () => {
-//   const pokemonELs = document.getElementsByClassName('pokemon');
-//   let removablePokemons = [];
-//   for (let i = 0; i < pokemonELs.length; i++) {
-//     const pokemonEL = pokemonEls[i];
-//     removablePokemons = [...removablePokemons, pokemonEl];
-//   }
-//   removablePokemons.forEach((remPoke) => remPoke.remove());
-// };
-// const getPokemon = async (id) => {
-//   const searchPoketmons = pokemons.filter((poke) => poke.name === id);
-//   removePokemon();
-//   searchPoketmons.forEach((pokemon) => createpokemonCard(pokemon));
-// };
-// const getALLpokemon = async (id) => {
-//   const res = await fetch(`${url}/${id}`);
-//   const pokemon = await res.json();
-//   pokemons = [...pokemons, pokemon];
-// };
-// fetchPokemons();
-
-// function createpokemonCard(pokemon) {``
-//   const pokemonEL = document.createElement('div');
-//   pokemonEL.classList.add('pokemon');
-//   const poke_types = pokemon.types.map((el) => el.type.name).slice(0, 1);
-//   const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-//   const poke_stat = pokemon.stats.map((el) => el.stat.name);41+
-//   const stats = poke_stat.slice(0, 3);
-//   const base_value = pokemon.stats.map((el) => el.base_stat);
-//   const base_stat = base_value.slice(0, 3);
-//   const stat = stats
-//     .map((stat) => {
-//       return `<li class="base">${stat}</li>`;
+// const baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
+// const Pokemons = document.querySelector('#pokemons');
+// const Detail = document.querySelector('#detail');
+// try {
+//   fetch(baseUrl)
+//     .then((response) => {
+//       const responseJson = response.json();
+//       return responseJson;
 //     })
-//     .join('');
-//   const base = base_stat
-//     .map((base) => {
-//       return `<li class="base">${base}</li>`;
+//     .then((data) => {
+//       const pokemons = data.results;
+//       pokemons.forEach((pokemon) => {
+//         document.getElementById('pokemons').insertAdjacentHTML(
+//           'beforeend',
+//           `<li onclick='detail("${pokemon.url}")'>${pokemon.name}</li>`,
+//           `<li onclick='detail("${pokemon.url}")'>
+//             </li>`
+//         );
+//       });
 //     })
-//     .join('');
-//   const pokeinnerHTML = `<div class='img-container>
-//     <img src="https://pokeres.bastionbot.org/images/pokemon/${
-//       pokemon.id
-//     }.png" alt="${name}"/>
-//     </div>
-//     <div class="info">
-//       <span class="number">#${pokemon.id.toString().padStart(3, '0')}
-//       </span>
-//       <h3 class="name">${name}</h3>
-//       <small class="type"><span>${poke_types}</span></small>
-//     </div>
-//     <div class="stats">
-//     <h2>Stats</h2>
-//     <div class="flex">
-//     <ul>${stat}</ul>
-//     <ul>${base}</ul>
-//     </div>
-//     </div>
-//     `;
-//   pokemonEL.innerHTML = pokeinnerHTML;
-//   poke_container.appendChild(pokemonEl);
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// } catch (error) {
+//   console.error(error);
 // }
-// form.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   const searchItem = search.nodeValue;
-//   if (searchTerm) {
-//     getPokemon(searchTerm);
-//     search.value = '';
-//   } else if (searchTerm === '') {
-//     pokemons = [];
-//     removePokemon();
-//     fetchPokemons();
-//   }
-// });
 
-fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-  .then((response) => response.json())
-  .then((json) => console.log(json));
+// const detail = (url) => {
+//   try {
+//     fetch(url)
+//       .then((response) => response.json())
+//       .then((pokemon) => {
+//         document.getElementById('detail').innerHTML = '';
+//         document.getElementById('detail').insertAdjacentHTML(
+//           'beforeend',
+//           `
+//           <img src="${pokemon.sprites.front_default}" alt="${pokemon.korean_name}" />
+//           <p>${pokemon.name}</p>
+//             <p>ID : ${pokemon.id}</p>
+//           `
+//         );
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+// const fetchData = async () => {
+//   const allPokemonData = [];
+//   for (let i = 1; i <= 151; i++) {
+//     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
+//     const speciesResponse = await axios.get(
+//       `https://pokeapi.co/api/v2/pokemon-species/${i}`
+//     );
+//     const koreanName = speciesResponse.data.names.find(
+//       (name) => name.language.name === 'ko'
+//     );
+//     allPokemonData.push({ ...response.data, korean_name: koreanName.name });
+//   }
+//   setPokemonData(allPokemonData);
+// };
+
+// fetchData();
+
+const pokedex = document.getElementById('pokedex');
+const fetchPokemon = () => {
+  const promises = [];
+  for (let i = 1; i <= 150; i++) {
+    const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    promises.push(fetch(url).then((res) => res.json()));
+  }
+  Promise.all(promises).then((results) => {
+    const pokemon = results.map((result) => ({
+      name: result.name,
+      image: result.sprites['front_default'],
+      type: result.types.map((type) => type.type.name).join(', '),
+      id: result.id,
+    }));
+    displayPokemon(pokemon);
+  });
+};
+const displayPokemon = (pokemon) => {
+  console.log(pokemon);
+  const pokemonHTMLString = pokemon
+    .map(
+      (pokeman) => `
+      <li class="card" style="padding: 2%;margin: 2%;list-style-type: none;">
+          <img class="card-image" src="${pokeman.image}"/>
+          <h2 class="card-title"> ${pokeman.name}</h2>
+          <p class="card-subtitle">Type: ${pokeman.type}</p>
+      </li>
+    
+  `
+    )
+    .join('');
+  pokedex.innerHTML = pokemonHTMLString;
+};
+
+fetchPokemon();

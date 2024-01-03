@@ -1,5 +1,14 @@
-@import url("https://webfontworld.github.io/goodchoice/Jalnan.css");
-@import url("https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo.css");
+td {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #d3d3d3;
+  background-color: #f5f5f5;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #gameContainer {
   text-align: center;
 }
@@ -16,97 +25,21 @@
 }
 
 .container {
-  width: 640px;
-  margin: 24px auto;
-}
-.container div {
-  width: 100%;
-  font-family: "Jalnan";
-  font-size: 32px;
-  font-weight: bold;
-}
-.container .start {
   margin: 0 auto;
   text-align: center;
-}
-.container .start div {
-  margin: 16px 0;
-}
-.container .start button {
-  width: 45%;
-  border: 0;
-  padding: 16px 0;
-  border-radius: 16px;
-  margin: 0 8px;
-  font-family: "NanumSquareNeo";
-  font-size: 16px;
-  cursor: pointer;
-}
-.container .start button:first-of-type {
-  background-color: #ff968a;
-}
-.container .start button:last-child {
-  background-color: #d4f0f0;
-}
-.container table {
-  margin: 24px auto;
-}
-.container table:first-of-type {
-  text-align: center;
   width: 375px;
-  height: inherit;
+  height: 375px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 5px;
 }
-.container table:first-of-type td {
-  width: 120px;
-  height: 120px;
-  border: 1px solid #d3d3d3;
-  background-color: #f5f5f5;
-  font-size: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.container table:last-of-type {
-  text-align: center;
-  width: inherit;
-  height: inherit;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 5px;
-}
-.container table:last-of-type td {
-  width: 120px;
-  height: 120px;
-  border: 1px solid #d3d3d3;
-  background-color: #f5f5f5;
-  font-size: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.container .result {
-  margin: 0 auto;
+.container div {
   width: 100%;
-  text-align: center;
 }
-.container .result div {
-  font-family: "NanumSquareNeo";
-  font-size: 22px;
-}
-.container .result button {
+.container .start button {
+  width: 45%;
   border: 0;
-  padding: 8px 0;
-  border-radius: 16px;
-  margin: 24px 0;
-  font-family: "NanumSquareNeo";
-  font-size: 16px;
-  width: 20%;
-  cursor: pointer;
+  padding: 6px;
 }
 
 .display {

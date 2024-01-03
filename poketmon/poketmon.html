@@ -2,22 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Let's hunt my pokemon</title>
   </head>
+  <style>
+    .columns {
+      display: flex;
+      justify-content: space-around;
+    }
+  </style>
   <body>
-    <div>
-      <h1>나의 작은 포켓몬</h1>
-      <form id="form">
-        <input
-          type="text"
-          id="search"
-          class="search"
-          placeholder="search your Pokemon"
-        />
-      </form>
-      <div id="poke_container" class="poke_container"></div>
+    <div class="container">
+      <h1 style="text-align: center;">Pokemon</h1>
+      <div class="box" style="text-align: center;">
+      <input id="searchbar" class="poke-search" onkeyup="search_pokemon()" type="text"
+      name="search" placeholder="Search Pokemon.." style="width: 62%; position: relative; margin-right: 10%;">
+    </div>
+      <ul id="pokedex" style="display: flex;flex-wrap: wrap;"></ul>
+    </div>
     </div>
     <script src="./poketmon.js"></script>
+    <!-- <script src="./search.js"></script> -->
+    <script>
+      function search_pokemon() { 
+        let input = document.getElementById('searchbar').value 
+        input=input.toLowerCase(); 
+        // storing all card along wiith details in variable
+        let x = document.getElementsByClassName('card'); 
+          
+        for (i = 0; i < x.length; i++) {  
+            if (!x[i].innerHTML.toLowerCase().includes(input)) { 
+                x[i].style.display="none"; 
+            } 
+            else { 
+                x[i].style.display="list-item";                  
+            } 
+        } 
+      } 
+      </script>
   </body>
 </html>

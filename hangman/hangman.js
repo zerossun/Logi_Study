@@ -1,4 +1,3 @@
-
 const first = document.querySelector('#first');
 const content = document.querySelector('#content');
 const end = document.querySelector('#end');
@@ -12,7 +11,6 @@ const next = document.querySelector('.next');
 const score = document.querySelector('.score');
 const replay = document.querySelector('.replay');
 
-
 const images = [
   './img/0.png',
   './img/1.png',
@@ -25,7 +23,6 @@ const images = [
 ];
 
 const HIDDEN = 'hidden';
-
 
 const quiz_Q = [
   {
@@ -119,13 +116,12 @@ const quiz_List = (index) => {
   quiz_img.innerHTML = quizQ;
   quiz__desc.innerHTML = quizD;
 
-  
   const quizChoiceSpan = content.querySelectorAll('.quiz_choice label span');
-  
+
   for (let i = 0; i < quizChoiceSpan.length; i++) {
     quizChoiceSpan[i].setAttribute('onclick', 'choiceSelected(this)');
   }
-  
+
   next.classList.add(HIDDEN);
   quiz__desc.classList.add(HIDDEN);
 };
@@ -134,7 +130,6 @@ function choiceSelected(answer) {
   let userAnsewr = answer.innerText;
   let currentAnswer = quiz_Q[quizCount].quizCho;
   if (userAnsewr === currentAnswer) {
-   
     quizScore = quizScore + 1;
   }
   next.classList.remove(HIDDEN);

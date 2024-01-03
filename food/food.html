@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"href="./reset.css"></link>
+    <link rel="stylesheet" href="./style.css"></link>
+    <title>food</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="meal_wrapper">
+        <div class="meal_search">
+          <h2 class="title">Find your meal</h2>
+          <blockquote>
+            Real food doesn't heve ingredients, real food is ingredeients.<br />
+            <cite>-Jamie Oliver</cite>
+          </blockquote>
+          <div class="meal_search_box">
+            <input
+              type="text"
+              class="meal_search--content"
+              placeholder="Enter an ingredient"
+              id="search_input"
+            />
+            <button type="submit" class="meal_search--btn btn" id="search_btn">
+              click
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal_result">
+        <h2 class="title">Your Search Results:</h2>
+        <div id="meal">
+        </div>
+      </div>
+
+      <div class="meal_details">
+        <button
+          type="button"
+          class="btn recipe_close_btn"
+          id="recipe_close_btn"
+        >X</button>
+        <div class="meal_details_content">
+          <!-- <h2 class="recipe_title">Meals Name Here</h2>
+          <p class="recipe_category">Category Name</p>
+          <div class="recipe_intruct">
+            <h3>Instructions</h3>
+            <p>
+              The API and site will always remain free at point of access. If you
+              love our service and want extra features you can sign up as a Paypal
+              supporter. You can cancel anytime. This allows us to pay for the
+              servers and bandwidth and develop new features.
+            </p>
+          </div>
+          <div class="recipe_meal_img">
+            <img>
+          </div>
+          <div class="recipe_link">
+            <a href="#" target="_blank">Watch Video</a>
+          </div> -->
+  
+        </div>
+      </div>
+
+  
+
+      <!-- <h3>커피를 주문하세요</h3>
+      <button data-coffee-name="아메리카노" data-price="3000"  class="button">아메리카노</button>
+      <button data-coffee-name="카페라떼" data-price="3500"  class="button">카페라떼</button>
+      <button data-coffee-name="바닐라라떼" data-price="4000" class="button">바닐라라떼</button>
+      <br>
+      <h3>주문내역</h3>
+      <p><span id="coffee"></span> : <span id="price"></span>won</p> -->
+    </div>
+    <script src="./script.js"></script>
+    <!-- <script>
+      let btn = document.getElementsByClassName('button');
+      let coffee = document.getElementById('coffee');
+      let price = document.getElementById('price');
+
+      for(let i=0; i<btn.length; i++){
+        
+        btn[i].addEventListener('click',function(){
+          let cName = this.dataset.coffeeName;
+          let cPrice = this.dataset.price;
+
+          coffee.textContent = cName;
+          price.textContent = cPrice;
+        })
+      }
+      
+    </script> -->
+  </body>
+</html>

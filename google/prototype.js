@@ -323,4 +323,9 @@ class User3 {
   get name() {
     return this._name;
   }
+  set name(value) {
+    if (value.length < 4) {
+      console.log('');
+    }
+  }
 }
