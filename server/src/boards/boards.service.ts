@@ -15,7 +15,7 @@ export class BoardsService {
   findBoard(id: number): Board {
     const board = this.getData().boards.find((board) => board.id === id);
 
-    if (!board) throw new NotFoundException();
+    if (!board) throw new NotFoundException('id와 일치하는 게시글이 없습니다.');
 
     return board;
   }
@@ -47,7 +47,10 @@ export class BoardsService {
 
     const target = data.boards.find((board) => board.id === id);
 
-    if (!target) throw new NotFoundException();
+    if (!target)
+      throw new NotFoundException(
+        '삭제하려는 게시글 id 와 일치하는 게시글이 없습니다.',
+      );
 
     data.boards = data.boards.filter((board) => board.id !== id);
 
@@ -67,7 +70,10 @@ export class BoardsService {
 
     const target = data.boards.find((board) => board.id === id);
 
-    if (!target) throw new NotFoundException();
+    if (!target)
+      throw new NotFoundException(
+        '수정하려는 게시글 id 와 일치하는 게시글이 없습니다.',
+      );
 
     if (boardUpdateDTO.title) target.title = boardUpdateDTO.title;
     if (boardUpdateDTO.content) target.content = boardUpdateDTO.content;
