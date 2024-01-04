@@ -6,8 +6,8 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { ServerResponse } from 'http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface Response<T> {
   data: T;
@@ -40,19 +40,6 @@ export class TransformInterceptor<T>
           message: httpMethodResponseMap[method],
         };
       }),
-    );
-  }
-}
-
-@Injectable()
-export class ErrorsInterceptor implements NestInterceptor {
-  intercept(_context: ExecutionContext, next: CallHandler): Observable<any> {
-    return next.handle().pipe(
-      catchError((error: any) =>
-        throwError(() => {
-          return error;
-        }),
-      ),
     );
   }
 }

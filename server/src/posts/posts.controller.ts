@@ -10,22 +10,24 @@ import {
   Post as PostMethod,
   Put,
   Query,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import {
-  ErrorsInterceptor,
-  TransformInterceptor,
-} from '@src/common/http/transform.interceptor';
+import { ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@src/common/auth.guard';
+import { ErrorsInterceptor } from '@src/common/error.interceptor';
+import { TransformInterceptor } from '@src/common/transform.interceptor';
 import { Paginated } from '@src/util/paging/paging';
 import { ApiOkResponsePaginated } from '@src/util/paging/paging.decorator';
 import { Post, PostCreateDTO, PostUpdateDTO } from './posts';
 import { PostsService } from './posts.service';
 
 @ApiTags('게시글 API')
+@ApiHeader({ name: 'user' })
 @Controller('posts')
 @UseInterceptors(TransformInterceptor)
 @UseInterceptors(ErrorsInterceptor)
+@UseGuards(AuthGuard)
 export class PostsController {
   constructor(private readonly postService: PostsService) {}
 
