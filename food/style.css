@@ -29,6 +29,24 @@ body {
   margin-bottom: 1rem;
 }
 
+.meal_item {
+  border-radius: 1rem;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
+}
+.meal_item .meal_img img {
+  width: 100%;
+  display: block;
+}
+.meal_item .meal_name {
+  padding: 1.5rem 0.5rem;
+}
+.meal_item .meal_name h3 {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
 /*  */
 .container {
   min-height: 100vh;
@@ -82,29 +100,57 @@ body {
   background: #b54507;
 }
 
+#pro {
+  display: flex;
+}
+
+#today_meal p {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  display: block;
+}
+#today_meal #meal_choice {
+  margin-bottom: 2.5rem;
+}
+#today_meal #meal_choice .meal_today {
+  width: 35%;
+  margin: 0 auto;
+}
+
+#meal_options b {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  display: block;
+}
+#meal_options #meal_category {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#meal_options #meal_category .meal_option {
+  width: 14.2%;
+  padding: 6px 8px;
+}
+#meal_options #meal_category .meal_option h3 {
+  font-size: 1rem;
+}
+#meal_options #meal_category .meal_option .meal_item {
+  padding: 20px;
+  border-radius: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
+}
+
 .meal_result {
   margin: 4rem 2.4rem 0 2.4rem;
 }
 .meal_result #meal {
   margin: 2.4rem 0;
   cursor: pointer;
-}
-.meal_result .meal_item {
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
-  margin: 2rem 0;
-}
-.meal_result .meal_img img {
-  width: 100%;
-  display: block;
-}
-.meal_result .meal_name {
-  padding: 1.5rem 0.5rem;
-}
-.meal_result .meal_name h3 {
-  font-size: 1.4rem;
-  text-align: center;
 }
 .meal_result .recipe_btn {
   text-decoration: none;

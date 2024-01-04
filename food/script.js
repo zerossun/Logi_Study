@@ -4,38 +4,74 @@ const mealDetailsContent = document.querySelector('.meal_details_content');
 const recipteCloseBtn = document.getElementById('recipe_close_btn');
 const searchInput = document.getElementById('search_input');
 const mealDetails = document.getElementsByClassName('meal_details_content');
-// searchBtn.addEventListener('click', getMealList);
-
-// function getMealList() {
-//   let searchInputTxt = searchInput.value.trim();
-//   fetch(
-//     `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputTxt}`
-//   )
-//     .then((response) => response.json())
-//     .then((data) => {
-//       console.log(data);
-//       let html = '';
-//       if (data.meals) {
-//         data.meals.forEach((meal) => {
-//           html += `
-//               <div class="meal_item" data-id="${meal.idMeal}">
-//                 <div class="meal_img">
-//                   <img src="${meal.strMealThumb}" alt="food" />
-//                 </div>
-//                 <div class="meal_name">
-//                   <h3>${meal.strMeal}</h3>
-//                   <a href="#" class="recipe_btn">Get a Recipe</a>
-//                 </div>
-//               </div>
-//           `;
-//         });
-//       }
-//       mealList.innerHTML = html;
-//     });
-// }
-
+const mealChoice = document.getElementById('meal_choice');
+const meal_options = document.getElementById('meal_options');
+const mealCategory = document.getElementById('meal_category');
 searchBtn.addEventListener('click', getMealList);
 mealList.addEventListener('click', getRecipe);
+
+fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    let html4 = ``;
+    if (data.categories) {
+      data.categories.forEach((meal) => {
+        html4 += `
+        <div class="meal_option">
+          <div class="meal_item" data-id="${meal.idCategory}">
+            <div class="meal_img">
+              <img src="${meal.strCategoryThumb}"/>
+            </div>
+            <div class="meal_name">
+              <h3>${meal.strCategory}</h3>
+            </div>
+          </div>
+        </div>`;
+      });
+      localStorage.setItem('today2', JSON.stringify(data));
+    } else {
+      html4 = `sorry I can't find it :(`;
+    }
+    mealCategory.innerHTML = html4;
+  });
+
+fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    let html3 = ``;
+    if (data.meals) {
+      data.meals.forEach((meal) => {
+        html3 = `
+        <div class="meal_today">
+          <div class="meal_item" data-id="${meal.idMeal}">
+            <div class="meal_img">
+              <img src="${meal.strMealThumb}"/>
+            </div>
+            <div class="meal_name">
+              <h3>${meal.strMeal}</h3>
+            </div>
+          </div>
+        </div>
+        `;
+        let menuObj = {
+          'name' : `${meal.strMeal}`,
+          'img' : `${meal.strMealThumb}`,
+          'category' : `${meal.strCategory}`,
+          'area' : `${meal.strArea}`,
+          'instruct' : `${meal.strInstructions}`,
+          'ingredient1' : `${meal.strIngredient1}`,
+          'ingredient2' : `${meal.strIngredient2}`,
+        }
+        localStorage.setItem('today', JSON.stringify(menuObj));
+      });
+    } else {
+      html3 = `sorry I can't find it :(`;
+    }
+    mealChoice.innerHTML = html3;
+    // let menu =  data.meals[0].strMeal;
+  });
 
 function getMealList() {
   let searchInputTxt = searchInput.value.trim();
@@ -102,4 +138,9 @@ function mealReicipeModal(meal) {
 }
 recipteCloseBtn.addEventListener('click', function () {
   mealDetailsContent.parentElement.classList.remove('showRecipe');
+});
+
+mealChoice.addEventListener('click', function () {
+  console.log('1234');
+  location.href = 'Detail/Today/Today.html';
 });
