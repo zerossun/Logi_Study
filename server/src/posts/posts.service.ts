@@ -1,14 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Paginated } from '@src/util/paging/paging';
 import { plainToInstance } from 'class-transformer';
 import { readFileSync, writeFileSync } from 'fs';
 import { Data } from 'src/types/data';
-import {
-  Post,
-  PostCreateDTO,
-  PostUpdateDTO,
-  Paginated,
-  PaginatedRow,
-} from './posts';
+import { Post, PostCreateDTO, PostUpdateDTO } from './posts';
 
 @Injectable()
 export class PostsService {
@@ -24,10 +19,7 @@ export class PostsService {
     return this.getData().posts;
   }
 
-  findPaginatedPosts(
-    page: number,
-    size: number,
-  ): Paginated<PaginatedRow<Post>> {
+  findPaginatedPosts(page: number, size: number): Paginated<Post> {
     const start = (page - 1) * size;
     const last = page * size;
 
@@ -35,11 +27,11 @@ export class PostsService {
 
     const list = posts
       .slice(start, last)
-      .map((baord, index) => ({ ...baord, rowNum: index + start + 1 }));
+      .map((post, index) => ({ ...post, rowNum: index + start + 1 }));
 
     const hasNext = !!posts[last + 1];
 
-    return new Paginated(list, hasNext);
+    return new Paginated({ list, hasNext, total: posts.length });
   }
 
   removePost(id: number): Post {
@@ -78,6 +70,8 @@ export class PostsService {
     if (postUpdateDTO.title) target.title = postUpdateDTO.title;
     if (postUpdateDTO.content) target.content = postUpdateDTO.content;
 
+    target.updatedAt = new Date();
+
     this.setData(data);
 
     return target;
@@ -103,13 +97,13 @@ export class PostsService {
 
   private getData(): Data {
     const data: Data = JSON.parse(
-      readFileSync('src/database/post.json', 'utf-8'),
+      readFileSync('src/database/board.json', 'utf-8'),
     );
     return data;
   }
 
   private setData(data: Data) {
     const stringifiedData: string = JSON.stringify(data);
-    writeFileSync('src/database/post.json', stringifiedData, 'utf-8');
+    writeFileSync('src/database/board.json', stringifiedData, 'utf-8');
   }
 }

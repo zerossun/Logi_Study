@@ -1,26 +1,31 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class Post {
+  @ApiProperty({ description: '게시글 ID', example: 1, readOnly: true })
   id: number;
+  @ApiProperty({ description: '제목', example: '제목1', required: true })
   title: string;
+  @ApiProperty({ description: '내용', example: '내용2', required: true })
   content: string;
+  @ApiProperty({
+    description: '작성일시',
+    example: '2024-01-04T05:00:01.067Z',
+    required: true,
+  })
+  createdAt: Date;
+  @ApiProperty({
+    description: '수정일시',
+    example: '2024-01-04T05:00:01.067Z',
+    required: true,
+  })
+  updatedAt: Date;
 
   constructor({ title, content }: { title: string; content: string }) {
     this.id = Date.now();
     this.title = title;
     this.content = content;
-  }
-}
-
-export type PaginatedRow<T> = T & { rowNum: number };
-
-export class Paginated<T> {
-  list: PaginatedRow<T>[];
-  hasNext: boolean;
-
-  constructor(list: PaginatedRow<T>[], hasNext: boolean) {
-    this.list = list;
-    this.hasNext = hasNext;
+    this.createdAt = new Date();
+    this.updatedAt = this.createdAt;
   }
 }
 
