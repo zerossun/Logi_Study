@@ -1,5 +1,5 @@
-import { Board } from 'src/boards/boards';
+import { Post } from 'src/posts/posts';
 
 export type Data = {
-  boards: Board[];
+  posts: Post[];
 };

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class Board {
+export class Post {
   id: number;
   title: string;
   content: string;
@@ -24,20 +24,20 @@ export class Paginated<T> {
   }
 }
 
-export class BoardUpdateDTO {
+export class PostUpdateDTO {
   @ApiProperty({ description: '제목', example: '제목', required: false })
   title: string;
   @ApiProperty({ description: '내용', example: '내용입니다.', required: false })
   content: string;
 }
 
-export class BoardCreateDTO {
+export class PostCreateDTO {
   @ApiProperty({ description: '제목', example: '제목' })
   title: string;
   @ApiProperty({ description: '내용', example: '내용입니다.' })
   content: string;
 
   toEntity() {
-    return new Board({ title: this.title, content: this.content });
+    return new Post({ title: this.title, content: this.content });
   }
 }
