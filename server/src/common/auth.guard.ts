@@ -7,14 +7,26 @@ import {
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 
+export enum AccessableUserLastName {
+  Kim = 'k',
+  Choi = 'c',
+  Min = 'm',
+  Won = 'w',
+}
+
 @Injectable()
 export class AuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest() as Request;
-    const accessedUser = request.header('user');
-    const ACCESSABLE_USERS = ['m', 'k', 'c', 'w'];
+    const accessedUser = request.header('User-Last-Name');
+    const ACCESSABLE_USERS = [
+      AccessableUserLastName.Choi,
+      AccessableUserLastName.Kim,
+      AccessableUserLastName.Min,
+      AccessableUserLastName.Won,
+    ] as string[];
 
     if (ACCESSABLE_USERS.includes(accessedUser)) return true;
 

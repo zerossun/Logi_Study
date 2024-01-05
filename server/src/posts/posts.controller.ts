@@ -14,7 +14,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@src/common/auth.guard';
+import { AccessableUserLastName, AuthGuard } from '@src/common/auth.guard';
 import { ErrorsInterceptor } from '@src/common/error.interceptor';
 import { TransformInterceptor } from '@src/common/transform.interceptor';
 import { Paginated } from '@src/util/paging/paging';
@@ -23,7 +23,7 @@ import { Post, PostCreateDTO, PostUpdateDTO } from './posts';
 import { PostsService } from './posts.service';
 
 @ApiTags('게시글 API')
-@ApiHeader({ name: 'user' })
+@ApiHeader({ name: 'User-Last-Name', enum: AccessableUserLastName })
 @Controller('posts')
 @UseInterceptors(TransformInterceptor)
 @UseInterceptors(ErrorsInterceptor)

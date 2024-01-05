@@ -33,7 +33,6 @@ export class TransformInterceptor<T>
 
     return next.handle().pipe(
       map((data) => {
-        console.log(data);
         return {
           data,
           statusCode: HttpStatus.OK,
