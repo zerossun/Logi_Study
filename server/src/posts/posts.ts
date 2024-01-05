@@ -20,10 +20,9 @@ export class Post {
   })
   updatedAt: Date;
 
-  constructor({ title, content }: { title: string; content: string }) {
+  public constructor(params: Partial<Post>) {
+    Object.assign(this, params);
     this.id = Date.now();
-    this.title = title;
-    this.content = content;
     this.createdAt = new Date();
     this.updatedAt = this.createdAt;
   }

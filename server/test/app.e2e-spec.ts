@@ -1,10 +1,12 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { Post } from '@src/posts/posts';
+import { PostsModule } from '@src/posts/posts.module';
+import { Data } from '@src/types/data';
+import { plainToInstance } from 'class-transformer';
+import { readFileSync } from 'fs';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import { PostsModule } from '@src/posts/posts.module';
-import { readFileSync } from 'fs';
-import { Data } from '@src/types/data';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -60,7 +62,11 @@ describe('PostsController (e2e)', () => {
 
           expect(response.body.statusCode).toEqual(200);
           expect(response.body).toBeDefined();
+
           expect(Array.isArray(response.body.data)).toBeTruthy();
+          expect(plainToInstance(Post, response.body.data[0])).toBeInstanceOf(
+            Post,
+          );
         });
       });
 
@@ -78,7 +84,9 @@ describe('PostsController (e2e)', () => {
 
           expect(response.body.statusCode).toEqual(200);
           expect(response.body).toBeDefined();
-          expect(!!response.body.data).toBeTruthy();
+          expect(plainToInstance(Post, response.body.data)).toBeInstanceOf(
+            Post,
+          );
         });
 
         it('no title => 400', async () => {
@@ -122,7 +130,9 @@ describe('PostsController (e2e)', () => {
 
           expect(response.body.statusCode).toEqual(200);
           expect(response.body).toBeDefined();
-          expect(!!response.body.data).toBeTruthy();
+          expect(plainToInstance(Post, response.body.data)).toBeInstanceOf(
+            Post,
+          );
         });
         it('wrong id => 404', async () => {
           const id = Date.now();
@@ -146,7 +156,9 @@ describe('PostsController (e2e)', () => {
 
           expect(response.body.statusCode).toEqual(200);
           expect(response.body).toBeDefined();
-          expect(!!response.body.data).toBeTruthy();
+          expect(plainToInstance(Post, response.body.data)).toBeInstanceOf(
+            Post,
+          );
         });
         it('empty content => 400', async () => {
           const id = 10;
@@ -189,7 +201,9 @@ describe('PostsController (e2e)', () => {
 
           expect(response.body.statusCode).toEqual(200);
           expect(response.body).toBeDefined();
-          expect(!!response.body.data).toBeTruthy();
+          expect(plainToInstance(Post, response.body.data)).toBeInstanceOf(
+            Post,
+          );
         });
 
         it('wrong id => 404', async () => {
@@ -215,6 +229,9 @@ describe('PostsController (e2e)', () => {
           expect(response.body.statusCode).toEqual(200);
           expect(response.body).toBeDefined();
           expect(Array.isArray(response.body.data.list)).toBeTruthy();
+          expect(
+            plainToInstance(Post, response.body.data.list[0]),
+          ).toBeInstanceOf(Post);
         });
 
         it('zero page or zero size => 400', async () => {
