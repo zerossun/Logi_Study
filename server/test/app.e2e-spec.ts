@@ -204,11 +204,11 @@ describe('PostsController (e2e)', () => {
       });
     });
 
-    describe('/paging', () => {
+    describe('/paginated', () => {
       describe('[GET]', () => {
         it('Ok', async () => {
           const response = await request(app.getHttpServer())
-            .get('/posts/paging')
+            .get('/posts/paginated')
             .query({ page: 1, size: 10 })
             .set('User-Last-Name', 'm');
 
@@ -219,7 +219,7 @@ describe('PostsController (e2e)', () => {
 
         it('zero page or zero size => 400', async () => {
           const response = await request(app.getHttpServer())
-            .get('/posts/paging')
+            .get('/posts/paginated')
             .query({ page: 0, size: 10 })
             .set('User-Last-Name', 'm');
 

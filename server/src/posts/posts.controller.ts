@@ -17,8 +17,8 @@ import { ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AccessableUserLastName, AuthGuard } from '@src/common/auth.guard';
 import { ErrorsInterceptor } from '@src/common/error.interceptor';
 import { TransformInterceptor } from '@src/common/transform.interceptor';
-import { Paginated } from '@src/util/paging/paging';
-import { ApiOkResponsePaginated } from '@src/util/paging/paging.decorator';
+import { Paginated } from '@src/util/paginated/paginated';
+import { ApiOkResponsePaginated } from '@src/util/paginated/paginated.decorator';
 import { Post, PostCreateDTO, PostUpdateDTO } from './posts';
 import { PostsService } from './posts.service';
 
@@ -40,7 +40,7 @@ export class PostsController {
     status: HttpStatus.BAD_REQUEST,
     description: 'page 또는 size 1보다 작거나 없음',
   })
-  @Get('paging')
+  @Get('paginated')
   getPaginatedPosts(
     @Query('page', ParseIntPipe) page?: number,
     @Query('size', ParseIntPipe) size?: number,

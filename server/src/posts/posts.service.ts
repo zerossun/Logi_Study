@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Paginated } from '@src/util/paging/paging';
+import { Paginated } from '@src/util/paginated/paginated';
 import { plainToInstance } from 'class-transformer';
 import { readFileSync, writeFileSync } from 'fs';
 import { Data } from 'src/types/data';
