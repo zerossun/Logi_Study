@@ -1,12 +1,11 @@
 import {
-  BadRequestException,
+  // BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   HttpStatus,
   Param,
-  ParseIntPipe,
   Post as PostMethod,
   Put,
   Query,
@@ -16,11 +15,16 @@ import {
 import { ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AccessableUserLastName, AuthGuard } from '@src/common/auth.guard';
 import { ErrorsInterceptor } from '@src/common/error.interceptor';
+import { ParseIntPipeKr, ParseMinIntPipeKr } from '@src/common/pipe.validate';
 import { TransformInterceptor } from '@src/common/transform.interceptor';
 import { Paginated } from '@src/util/paginated/paginated';
 import { ApiOkResponsePaginated } from '@src/util/paginated/paginated.decorator';
 import { Post, PostCreateDTO, PostUpdateDTO } from './posts';
 import { PostsService } from './posts.service';
+import {
+  ValidationPostCreateDTO,
+  ValidationPostUpdateDTO,
+} from './posts.validate';
 
 @ApiTags('게시글 API')
 @ApiHeader({ name: 'User-Last-Name', enum: AccessableUserLastName })
@@ -38,16 +42,19 @@ export class PostsController {
   @ApiOkResponsePaginated(Post)
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
-    description: 'page 또는 size 1보다 작거나 없음',
+    description: 'page 는 0보다 큰 값 넣어라',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'size 는 0보다 큰 값 넣어라',
   })
   @Get('paginated')
   getPaginatedPosts(
-    @Query('page', ParseIntPipe) page?: number,
-    @Query('size', ParseIntPipe) size?: number,
+    @Query('page', new ParseMinIntPipeKr(0, 'page 는 0보다 큰 값 넣어라'))
+    page?: number,
+    @Query('size', new ParseMinIntPipeKr(0, 'size 는 0보다 큰 값 넣어라'))
+    size?: number,
   ): Paginated<Post> {
-    if (page < 1 || size < 1)
-      throw new BadRequestException('page 또는 size 가 1보다 작습니다.');
-
     return this.postService.findPaginatedPosts(page, size);
   }
 
@@ -61,7 +68,10 @@ export class PostsController {
     description: 'id와 일치하는 게시글이 없음',
   })
   @Get(':id')
-  getPost(@Param('id', ParseIntPipe) id: number): Post {
+  getPost(
+    @Param('id', ParseIntPipeKr)
+    id: number,
+  ): Post {
     return this.postService.findPost(id);
   }
 
@@ -75,7 +85,7 @@ export class PostsController {
     description: 'id와 일치하는 게시글이 없음',
   })
   @Delete(':id')
-  deletePost(@Param('id', ParseIntPipe) id: number): Post {
+  deletePost(@Param('id', ParseIntPipeKr) id: number): Post {
     return this.postService.removePost(id);
   }
 
@@ -90,12 +100,9 @@ export class PostsController {
   })
   @Put(':id')
   updatePost(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() postUpdateDTO: PostUpdateDTO,
+    @Param('id', ParseIntPipeKr) id: number,
+    @Body(new ValidationPostUpdateDTO()) postUpdateDTO: PostUpdateDTO,
   ): Post {
-    if (!postUpdateDTO.content && !postUpdateDTO.title)
-      throw new BadRequestException('업데이트 하려는 내용이 없습니다.');
-
     return this.postService.modifyPost({ id, postUpdateDTO });
   }
 
@@ -109,11 +116,9 @@ export class PostsController {
     description: '제목 또는 내용 없음',
   })
   @PostMethod()
-  createPost(@Body() postCreateDTO: PostCreateDTO): Post {
-    if (!postCreateDTO.title) throw new BadRequestException('제목이 없습니다.');
-    if (!postCreateDTO.content)
-      throw new BadRequestException('내용이 없습니다.');
-
+  createPost(
+    @Body(new ValidationPostCreateDTO()) postCreateDTO: PostCreateDTO,
+  ): Post {
     return this.postService.savePost(postCreateDTO);
   }
 
