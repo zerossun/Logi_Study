@@ -2,6 +2,7 @@ import {
   // BadRequestException,
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   HttpStatus,
@@ -50,9 +51,17 @@ export class PostsController {
   })
   @Get('paginated')
   getPaginatedPosts(
-    @Query('page', new ParseMinIntPipeKr(0, 'page 는 0보다 큰 값 넣어라'))
+    @Query(
+      'page',
+      new DefaultValuePipe(1),
+      new ParseMinIntPipeKr(0, 'page 는 0보다 큰 값 넣어라'),
+    )
     page?: number,
-    @Query('size', new ParseMinIntPipeKr(0, 'size 는 0보다 큰 값 넣어라'))
+    @Query(
+      'size',
+      new DefaultValuePipe(10),
+      new ParseMinIntPipeKr(0, 'size 는 0보다 큰 값 넣어라'),
+    )
     size?: number,
   ): Paginated<Post> {
     return this.postService.findPaginatedPosts(page, size);
