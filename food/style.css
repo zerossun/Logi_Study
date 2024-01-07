@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+@font-face {
+  font-family: "MYArirang-Medium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/MYArirang-Medium.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
 * {
   padding: 0;
   margin: 0;
@@ -103,46 +109,50 @@ body {
 #pro {
   display: flex;
 }
-
-#today_meal p {
+#pro #today_meal {
+  width: 40%;
+}
+#pro #today_meal p {
   font-size: 1.4rem;
   margin-bottom: 1rem;
   font-weight: 600;
   display: block;
 }
-#today_meal #meal_choice {
+#pro #today_meal #meal_choice {
   margin-bottom: 2.5rem;
 }
-#today_meal #meal_choice .meal_today {
-  width: 35%;
+#pro #today_meal #meal_choice .meal_today {
   margin: 0 auto;
 }
-
-#meal_options b {
+#pro #meal_options {
+  width: 60%;
+}
+#pro #meal_options b {
   font-size: 1.4rem;
   margin-bottom: 1rem;
   font-weight: 600;
   display: block;
 }
-#meal_options #meal_category {
+#pro #meal_options #meal_category {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
 }
-#meal_options #meal_category .meal_option {
-  width: 14.2%;
+#pro #meal_options #meal_category .meal_option {
+  width: 20%;
+  display: inline-block;
   padding: 6px 8px;
 }
-#meal_options #meal_category .meal_option h3 {
+#pro #meal_options #meal_category .meal_option h3 {
   font-size: 1rem;
 }
-#meal_options #meal_category .meal_option .meal_item {
-  padding: 20px;
-  border-radius: 100%;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
+#pro #meal_options #meal_category .meal_option .meal_item {
+  padding: 10px;
+}
+#pro #meal_options #meal_category .meal_option .meal_item .meal_name {
+  padding: 0;
+}
+#pro #meal_options #meal_category .meal_option .meal_item .meal_name h3 {
+  font-size: 0.8rem;
+  word-break: break-all;
 }
 
 .meal_result {
@@ -306,6 +316,59 @@ body {
 
 .recipe_link a:hover {
   opacity: 0.8;
+}
+
+.back {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  float: left;
+  cursor: pointer;
+  border: 1.5px solid #111;
+  border-radius: 10rem;
+  padding: 0 0.2rem;
+}
+
+.mealToday .meal_item {
+  border-radius: 1rem;
+  cursor: default;
+  overflow: hidden;
+  box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
+}
+.mealToday .meal_item .meal_name div, .mealToday .meal_item .meal_name h3 {
+  width: inherit;
+  display: inline-block;
+  line-height: 1.5rem;
+}
+.mealToday .meal_item .meal_detail {
+  text-align: right;
+  padding: 0.5rem;
+}
+.mealToday .meal_item .meal_detail div {
+  width: auto;
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2rem;
+  color: #fff;
+}
+.mealToday .meal_item .meal_detail .meal_category {
+  background: #d65108;
+  width: auto;
+  display: inline-block;
+}
+.mealToday .meal_item .meal_detail .meal_area {
+  background: #b54507;
+}
+.mealToday .meal_item .mael_instruct {
+  padding: 1.5rem 0.5rem;
+}
+
+#meal_category .meal_item {
+  border-radius: 1rem;
+  cursor: cursor;
+  overflow: hidden;
+  box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
+  height: 540px;
 }
 
 /*  */
