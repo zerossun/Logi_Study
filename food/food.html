@@ -13,6 +13,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="./script.js"></script>
+    <script src="./quotes.js"></script>
   </head>
   <body>
     <div class="container">
@@ -65,32 +67,40 @@
         </div>
       </div>
 
-      <!-- <h3>커피를 주문하세요</h3>
+      <h3>커피를 주문하세요</h3>
       <button data-coffee-name="아메리카노" data-price="3000"  class="button">아메리카노</button>
       <button data-coffee-name="카페라떼" data-price="3500"  class="button">카페라떼</button>
       <button data-coffee-name="바닐라라떼" data-price="4000" class="button">바닐라라떼</button>
       <br>
       <h3>주문내역</h3>
       <p><span id="coffee"></span> : <span id="price"></span>won</p>
-    </div> -->
-    <script src="./script.js"></script>
-    <script src="./quotes.js"></script>
-    <!-- <script>
+    </div>
+    <!-- <script src="./script.js"></script>
+    <script src="./quotes.js"></script> -->
+    <script>
       let btn = document.getElementsByClassName('button');
       let coffee = document.getElementById('coffee');
       let price = document.getElementById('price');
 
       for(let i=0; i<btn.length; i++){
         
-        btn[i].addEventListener('click',function(){
+        // btn[i].addEventListener('click',function(){
+        //   let cName = this.dataset.coffeeName;
+        //   let cPrice = this.dataset.price;
+
+        //   coffee.textContent = cName;
+        //   price.textContent = cPrice;
+        // })
+
+        btn[i].addEventListener('click',function(e){
+          console.log("e", e.target.getAttribute("data-coffee-name"));
           let cName = this.dataset.coffeeName;
           let cPrice = this.dataset.price;
-
           coffee.textContent = cName;
           price.textContent = cPrice;
         })
       }
       
-    </script> -->
+    </script>
   </body>
 </html>
