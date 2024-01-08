@@ -18,7 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "berry-code": "yarn dlx @yarnpkg/sdks vscode"
+    "berry-code": "yarn dlx @yarnpkg/sdks vscode",
+    "buha:sample": "npx artillery quick --count 1 -n 6 http://localhost:3300/posts",
+    "buha": "npx artillery run ./buha/post-load-test.yml"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -43,6 +45,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@yarnpkg/sdks": "^3.1.0",
+    "artillery": "^2.0.3",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",

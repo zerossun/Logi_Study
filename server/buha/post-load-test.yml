@@ -1,0 +1,16 @@
+config:
+  target: http://localhost:3300/posts
+  http:
+    defaults:
+      headers:
+         User-Last-Name: "k"
+  phases:
+    - duration: 1 # 몇초동안
+      # arrivalRate: 6 # 최소 유저숫자
+      # rampTo: 6 # 최대 유저숫자
+      arrivalCount: 6 # 유저 수 고정
+      name: Warm up phase
+scenarios:
+  - flow:
+      - get:
+          url: "/"
