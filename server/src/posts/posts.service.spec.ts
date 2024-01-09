@@ -1,7 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { PostCreateDTO } from './posts';
-import { PostsService } from './posts.service';
+import { PostCreateDTO } from '@src/posts/posts';
+import { PostsService } from '@src/posts/posts.service';
 
 describe('PostService', () => {
   let service: PostsService;
