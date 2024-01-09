@@ -13,7 +13,13 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiHeader,
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { AccessableUserLastName, AuthGuard } from '@src/common/auth.guard';
 import { ErrorsInterceptor } from '@src/common/error.interceptor';
 import { ParseIntPipeKr, ParseMinIntPipeKr } from '@src/common/pipe.validate';
@@ -45,10 +51,12 @@ export class PostsController {
     status: HttpStatus.BAD_REQUEST,
     description: 'page 는 0보다 큰 값 넣어라',
   })
+  @ApiQuery({ name: 'page', required: false })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
     description: 'size 는 0보다 큰 값 넣어라',
   })
+  @ApiQuery({ name: 'size', required: false })
   @Get('paginated')
   getPaginatedPosts(
     @Query(
