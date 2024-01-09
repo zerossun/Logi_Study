@@ -21,7 +21,6 @@ function modify(event, listitem) {
   const targetInputElement = targetLiElement.getElementsByTagName('input')[1];
   const targetSpanElement = targetLiElement.getElementsByTagName('span')[0];
   const inputTemp = document.querySelector(`input[data-id="${listitem.id}"]`);
-  console.log('targetInputElement', targetInputElement, inputTemp);
   const isHidden = targetInputElement.classList.value === LOGIFORM_HIDDEN;
   if (isHidden) {
     // 편집모드

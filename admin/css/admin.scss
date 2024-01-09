@@ -1,3 +1,41 @@
+//break point
+$padding: 12px;
+$btnBack: #c6c6c6;
+$radius: 4px;
+$height: 32px;
+
+.disabled {
+  background: #000;
+}
+
+@mixin btn($width: 60px, $height: 32px, $color: #fff) {
+  border: none;
+  background-color: #{$btnBack};
+  border-radius: #{$radius};
+  cursor: pointer;
+  @if ($width == 60) {
+    width: 60px;
+    height: #{$height};
+    color: #fff;
+  } @else {
+    width: $width;
+    height: $height;
+    color: $color;
+  }
+}
+//common
+
+.hidden {
+  display: none;
+}
+
+/////
+body {
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* 테이블 행 */
 .title {
   text-align: center;
 }
@@ -6,20 +44,18 @@ table {
   border-collapse: collapse;
   width: 100%;
   background-color: white;
-}
-
-/* 테이블 행 */
-th,
-td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  text-align: center;
-}
-
-th {
-  background-color: #1b1b1b;
-  color: #ddd;
+  th {
+    background-color: #1b1b1b;
+    color: #ddd;
+    height: 30px;
+    line-height: 30px;
+    td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+  }
 }
 
 /* 테이블 올렸을 때 */
@@ -32,17 +68,17 @@ tbody tr:hover {
 /* 테이블 비율 */
 th:nth-child(1),
 td:nth-child(1) {
-  width: 15%;
+  width: 5%;
 }
 
 th:nth-child(2),
 td:nth-child(2) {
-  width: 15%;
+  width: 30%;
 }
 
 th:nth-child(3),
 td:nth-child(3) {
-  width: 30%;
+  width: 55%;
 }
 
 tr:nth-child(even) {
@@ -51,10 +87,15 @@ tr:nth-child(even) {
 
 //sub
 .sub_main {
+  & tr {
+    :hover {
+      background: #fff6f6;
+      cursor: default;
+    }
+  }
   .sub_title {
     div {
       display: inline-block;
-      width: auto;
     }
     .table_name {
     }
@@ -64,5 +105,30 @@ tr:nth-child(even) {
     }
   }
   .table_body {
+    height: 450px;
+  }
+}
+.sub {
+  float: right;
+  padding: #{$padding};
+  a {
+    cursor: pointer;
+    :hover {
+      font-weight: bold;
+    }
+  }
+}
+
+.comment {
+  padding: #{$padding};
+  .comment_sub {
+    input {
+      width: 80%;
+      border: 1px solid #ededed;
+      padding: 8px;
+    }
+    button {
+      @include btn;
+    }
   }
 }

@@ -1,4 +1,18 @@
 @charset "UTF-8";
+.disabled {
+  background: #000;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* 테이블 행 */
 .title {
   text-align: center;
 }
@@ -8,19 +22,17 @@ table {
   width: 100%;
   background-color: white;
 }
-
-/* 테이블 행 */
-th,
-td {
+table th {
+  background-color: #1b1b1b;
+  color: #ddd;
+  height: 30px;
+  line-height: 30px;
+}
+table th td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
   text-align: center;
-}
-
-th {
-  background-color: #1b1b1b;
-  color: #ddd;
 }
 
 /* 테이블 올렸을 때 */
@@ -33,24 +45,59 @@ tbody tr:hover {
 /* 테이블 비율 */
 th:nth-child(1),
 td:nth-child(1) {
-  width: 15%;
+  width: 5%;
 }
 
 th:nth-child(2),
 td:nth-child(2) {
-  width: 15%;
+  width: 30%;
 }
 
 th:nth-child(3),
 td:nth-child(3) {
-  width: 30%;
+  width: 55%;
 }
 
 tr:nth-child(even) {
   background-color: #fff6f6;
 }
 
+.sub_main tr :hover {
+  background: #fff6f6;
+  cursor: default;
+}
 .sub_main .sub_title div {
   display: inline-block;
-  width: auto;
+}
+.sub_main .table_body {
+  height: 450px;
+}
+
+.sub {
+  float: right;
+  padding: 12px;
+}
+.sub a {
+  cursor: pointer;
+}
+.sub a :hover {
+  font-weight: bold;
+}
+
+.comment {
+  padding: 12px;
+}
+.comment .comment_sub input {
+  width: 80%;
+  border: 1px solid #ededed;
+  padding: 8px;
+}
+.comment .comment_sub button {
+  border: none;
+  background-color: #c6c6c6;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 60px;
+  height: 32px;
+  color: #fff;
 }/*# sourceMappingURL=admin.css.map */
