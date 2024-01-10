@@ -1,6 +1,7 @@
 @charset "UTF-8";
-.disabled {
-  background: #000;
+.abled {
+  background-color: #020202 !important;
+  cursor: pointer !important;
 }
 
 .hidden {
