@@ -115,7 +115,9 @@ export class PostsController {
   })
   @Delete(':id')
   deletePost(@Param('id', ParseIntPipeKr) id: number): Post {
-    return this.postService.removePost(id);
+    const removedTarget = this.postService.removePost(id);
+    this.subject.next(removedTarget);
+    return removedTarget;
   }
 
   @ApiOperation({
