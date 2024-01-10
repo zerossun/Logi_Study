@@ -116,7 +116,7 @@ export class PostsController {
   @Delete(':id')
   deletePost(@Param('id', ParseIntPipeKr) id: number): Post {
     const removedTarget = this.postService.removePost(id);
-    this.subject.next(removedTarget);
+    this.subject.next({ data: removedTarget, type: 'DELETE' });
     return removedTarget;
   }
 
@@ -135,7 +135,7 @@ export class PostsController {
     @Body(new ValidationPostUpdateDTO()) postUpdateDTO: PostUpdateDTO,
   ): Post {
     const modifiedPost = this.postService.modifyPost({ id, postUpdateDTO });
-    this.subject.next(modifiedPost);
+    this.subject.next({ data: modifiedPost, type: 'UPDATE' });
     return modifiedPost;
   }
 
