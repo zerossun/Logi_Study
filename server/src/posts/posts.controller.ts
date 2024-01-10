@@ -1,15 +1,16 @@
 import {
-  // BadRequestException,
   Body,
   Controller,
   DefaultValuePipe,
   Delete,
   Get,
   HttpStatus,
+  MessageEvent,
   Param,
   Post as PostMethod,
   Put,
   Query,
+  Sse,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -21,11 +22,13 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { AccessableUserLastName, AuthGuard } from '@src/common/auth.guard';
+import { Public } from '@src/common/decorators/public.decorator';
 import { ErrorsInterceptor } from '@src/common/error.interceptor';
 import { ParseIntPipeKr, ParseMinIntPipeKr } from '@src/common/pipe.validate';
 import { TransformInterceptor } from '@src/common/transform.interceptor';
 import { Paginated } from '@src/util/paginated/paginated';
 import { ApiOkResponsePaginated } from '@src/util/paginated/paginated.decorator';
+import { Observable, Subject } from 'rxjs';
 import { Post, PostCreateDTO, PostUpdateDTO } from './posts';
 import { PostsService } from './posts.service';
 import {
@@ -40,7 +43,16 @@ import {
 @UseInterceptors(ErrorsInterceptor)
 @UseGuards(AuthGuard)
 export class PostsController {
+  private subject: Subject<any> = new Subject();
+  private observable$: Observable<any> = this.subject.asObservable();
+
   constructor(private readonly postService: PostsService) {}
+
+  @Sse('sse')
+  @Public()
+  sse(): Observable<MessageEvent> {
+    return this.observable$;
+  }
 
   @ApiOperation({
     summary: '게시글 페이징 조회 API',
@@ -120,7 +132,9 @@ export class PostsController {
     @Param('id', ParseIntPipeKr) id: number,
     @Body(new ValidationPostUpdateDTO()) postUpdateDTO: PostUpdateDTO,
   ): Post {
-    return this.postService.modifyPost({ id, postUpdateDTO });
+    const modifiedPost = this.postService.modifyPost({ id, postUpdateDTO });
+    this.subject.next(modifiedPost);
+    return modifiedPost;
   }
 
   @ApiOperation({
