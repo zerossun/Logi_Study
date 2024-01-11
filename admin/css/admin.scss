@@ -106,9 +106,19 @@ tr:nth-child(even) {
     }
   }
   .table_body {
+    td {
+      width: 100%;
+      height: 450px;
+      padding: #{$padding};
+    }
+  }
+  textarea {
+    width: 100%;
+    padding: #{$padding};
     height: 450px;
   }
 }
+
 .sub {
   float: right;
   padding: #{$padding};

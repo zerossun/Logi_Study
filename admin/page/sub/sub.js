@@ -3,29 +3,77 @@ const commentSub = document.querySelector('.comment_sub');
 const commentInput = document.querySelector('.comment_sub input');
 const commentBtn = document.querySelector('.comment_btn');
 const commentList = document.querySelector('.comment_list');
-let subCon = localStorage.getItem('content1');
-let subPar = JSON.parse(subCon);
 
-const Comment = document.querySelector('.comment');
+let subPar1 = localStorage.getItem('content1');
+let subPar = JSON.parse(subPar1);
+console.log(subPar);
+const Commented = document.querySelector('.comment');
 const Reserve = document.querySelector('.reserve');
 const Delete = document.querySelector('.delete');
+console.log(Reserve.textContent);
 
 let date1 = new Date();
 const time = date1.toLocaleDateString('ko-KR');
 
 let sub = `
+      <table>
         <tr class="sub_title">
             <th class="table_name">${subPar.name}</th>
             <th class="table_title">${subPar.title}</th>
             <th class="table_date">${subPar.date}</th>
         </th>
-        <tr>
-        <td class="table_body" colspan="3">${subPar.body}</td>
-        </tr>
-        `;
+        <tr class="table_body">
+          <td colspan="3">${subPar.body}</td>
+          </tr>
+      </table>
+        <textarea class="hidden"></textarea>
+      `;
 
 subMain.innerHTML = sub;
 
+// 내용 수정
+Reserve.addEventListener('click', contentRes);
+
+function contentRes() {
+  const tableBody = document.querySelector('.table_body td');
+  const tablearea = document.querySelector('textarea');
+
+  const isHidden = tablearea.classList.value === 'hidden';
+  tablearea.innerText = tableBody.innerText;
+
+  if (isHidden) {
+    tableBody.classList.add('hidden');
+    tablearea.classList.remove('hidden');
+    Reserve.textContent = '저장하기';
+  } else {
+    tableBody.classList.remove('hidden');
+    tablearea.classList.add('hidden');
+    Reserve.textContent = '수정';
+    history.back();
+    if (tablearea.value !== tableBody.innerText) {
+      tableBody.innerText = tablearea.value;
+      subPar.body = tablearea.value;
+      const contetn1 = {
+        name: subPar.name,
+        date: subPar.date,
+        title: subPar.title,
+        body: subPar.body,
+      };
+      console.log(contetn1);
+      localStorage.setItem('content1', JSON.stringify(contetn1));
+      Reserve.textContent = '';
+    } else {
+    }
+  }
+}
+
+// 내용 삭제
+
+Delete.addEventListener('click', delCon);
+
+function delCon() {
+  history.back();
+}
 // 댓글 내용 저장
 
 listObg = [];
